@@ -1,0 +1,2861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SQL Review">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1117" media="(prefers-color-scheme: dark)">
+<title>SQL Cards</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%232b59c3'/%3E%3Cpath d='M50 62h80M50 90h56M50 118h34' stroke='white' stroke-width='16' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --bg-sunk: #eef0f4;
+  --surface: #ffffff;
+  --ink: #161b26;
+  --ink-2: #3a4252;
+  --muted: #687184;
+  --line: #e4e7ec;
+  --line-2: #d3d8e0;
+  --accent: #2b59c3;
+  --accent-2: #1f46a3;
+  --accent-soft: #e9effc;
+  --accent-ink: #ffffff;
+  --hl: #ffe27a;
+  --good: #12804a;
+  --good-soft: #e6f6ed;
+  --good-line: #9fd8b8;
+  --bad: #c22f2f;
+  --bad-soft: #fdecec;
+  --bad-line: #f0b4b4;
+  --warn-soft: #fff6e0;
+  --warn-line: #f1d48a;
+  --code-bg: #f5f6f8;
+  --code-ink: #1d2330;
+  --inline-code: #eef0f3;
+  --t-k: #7c3aed;
+  --t-f: #0f6fb8;
+  --t-s: #0f7a3d;
+  --t-n: #b4500b;
+  --t-c: #8a93a3;
+  --t-o: #6b5b95;
+  --t-i: #9a3412;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, .06);
+  --shadow: 0 1px 3px rgba(16, 24, 40, .08), 0 4px 16px rgba(16, 24, 40, .06);
+  --shadow-lg: 0 12px 40px rgba(16, 24, 40, .14);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-head: 'Kumbh Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --header-h: 64px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1117; --bg-soft: #141923; --bg-sunk: #1a2030; --surface: #151a24;
+    --ink: #e8ebf1; --ink-2: #c3c9d5; --muted: #8d96a8; --line: #252c3a; --line-2: #343d50;
+    --accent: #6b93ff; --accent-2: #8aa9ff; --accent-soft: #1b2643; --accent-ink: #0b1020;
+    --hl: #6b5a14; --good: #4cc98a; --good-soft: #10291d; --good-line: #22573c;
+    --bad: #ff7b7b; --bad-soft: #2e1517; --bad-line: #6b2b2e; --warn-soft: #2a2312; --warn-line: #5c4a1c;
+    --code-bg: #10141c; --code-ink: #dfe4ee; --inline-code: #1f2533;
+    --t-k: #c4a5ff; --t-f: #7cc4ff; --t-s: #8be0a4; --t-n: #ffb27a; --t-c: #6c7689; --t-o: #b9a7e8; --t-i: #ffa07a;
+    --shadow-sm: none; --shadow: 0 1px 0 rgba(255,255,255,.03), 0 6px 24px rgba(0,0,0,.35); --shadow-lg: 0 16px 48px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1117; --bg-soft: #141923; --bg-sunk: #1a2030; --surface: #151a24;
+  --ink: #e8ebf1; --ink-2: #c3c9d5; --muted: #8d96a8; --line: #252c3a; --line-2: #343d50;
+  --accent: #6b93ff; --accent-2: #8aa9ff; --accent-soft: #1b2643; --accent-ink: #0b1020;
+  --hl: #6b5a14; --good: #4cc98a; --good-soft: #10291d; --good-line: #22573c;
+  --bad: #ff7b7b; --bad-soft: #2e1517; --bad-line: #6b2b2e; --warn-soft: #2a2312; --warn-line: #5c4a1c;
+  --code-bg: #10141c; --code-ink: #dfe4ee; --inline-code: #1f2533;
+  --t-k: #c4a5ff; --t-f: #7cc4ff; --t-s: #8be0a4; --t-n: #ffb27a; --t-c: #6c7689; --t-o: #b9a7e8; --t-i: #ffa07a;
+  --shadow-sm: none; --shadow: 0 1px 0 rgba(255,255,255,.03), 0 6px 24px rgba(0,0,0,.35); --shadow-lg: 0 16px 48px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+h1, h2 { font-family: var(--font-head); line-height: 1.2; margin: 0; }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+.t-k { color: var(--t-k); font-weight: 600; } .t-f { color: var(--t-f); } .t-s { color: var(--t-s); } .t-n { color: var(--t-n); }
+.t-c { color: var(--t-c); font-style: italic; } .t-o { color: var(--t-o); } .t-i { color: var(--t-i); }
+.offline-note { max-width: 720px; margin: 0 auto; padding: 0 16px 32px; color: var(--muted); font-size: 13px; }
+/* Review (spaced repetition). Phone-first: 375px wide, thumb-reachable actions,
+   safe-area aware, no hover dependence. Uses the site's color tokens. */
+.fc-home { max-width: 720px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); }
+.fc-hero h1 { font-size: 34px; font-weight: 800; margin: 2px 0 6px; }
+.fc-kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.fc-lead { color: var(--ink-2); margin: 0 0 16px; font-size: 16px; }
+.fc-sub { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+.fc-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.fc-stats.small { grid-template-columns: repeat(3, 1fr); margin: 18px 0 4px; }
+.fc-stats > div { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 10px 8px; text-align: center; min-width: 0; }
+.fc-stats b { display: block; font: 800 22px/1.15 var(--font-head); color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-stats span { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.3; margin-top: 2px; }
+
+.fc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 18px;
+  border-radius: 12px; border: 1px solid transparent; font: 600 16px var(--font); cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
+}
+.fc-btn:disabled { opacity: .6; cursor: default; }
+.fc-primary { background: var(--accent); color: var(--accent-ink); }
+.fc-ghost { background: var(--surface); color: var(--ink); border-color: var(--line-2); }
+.fc-wide { width: 100%; }
+.fc-study { width: 100%; min-height: 56px; font-size: 17px; justify-content: space-between; padding: 0 20px; }
+.fc-study:disabled { justify-content: center; background: var(--good-soft); color: var(--good); opacity: 1; }
+.fc-row { display: flex; gap: 10px; }
+.fc-row > .fc-btn { flex: 1; }
+
+.fc-counts { display: inline-flex; gap: 6px; font-variant-numeric: tabular-nums; }
+.fc-n { min-width: 26px; padding: 2px 7px; border-radius: 99px; font: 700 13px/1.4 var(--font); text-align: center; }
+.fc-new { background: color-mix(in srgb, #3b82f6 16%, transparent); color: #2563eb; }
+.fc-learn { background: color-mix(in srgb, #ef4444 14%, transparent); color: #dc2626; }
+.fc-due { background: color-mix(in srgb, #16a34a 15%, transparent); color: #15803d; }
+:root[data-theme="dark"] .fc-new { color: #8ab4ff; } :root[data-theme="dark"] .fc-learn { color: #ff8f8f; } :root[data-theme="dark"] .fc-due { color: #6fdc98; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fc-new { color: #8ab4ff; } :root:not([data-theme="light"]) .fc-learn { color: #ff8f8f; } :root:not([data-theme="light"]) .fc-due { color: #6fdc98; } }
+.fc-primary .fc-n { background: rgba(255,255,255,.22); color: inherit; }
+
+.fc-decks { margin-top: 28px; }
+.fc-section-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.fc-section-h h2 { font-size: 22px; font-weight: 800; }
+.fc-legend .fc-n { font-size: 11px; min-width: 0; }
+.fc-decks ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.fc-deck { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.fc-deck-main {
+  flex: 1; min-width: 0; display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px;
+  padding: 12px 10px 12px 12px; background: none; border: 0; text-align: left; cursor: pointer; color: var(--ink);
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; font: inherit;
+}
+.fc-deck-main:active { background: var(--bg-soft); }
+.fc-deck-emoji { font-size: 24px; text-align: center; font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
+.fc-deck-text { min-width: 0; display: grid; gap: 2px; }
+.fc-deck-name { font: 700 16px/1.25 var(--font-head); }
+.fc-deck-blurb { font-size: 13px; color: var(--muted); line-height: 1.35; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.fc-bar { display: block; height: 4px; border-radius: 99px; background: var(--bg-sunk); margin-top: 6px; overflow: hidden; }
+.fc-bar span { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+.fc-deck .fc-counts { flex-direction: column; gap: 3px; align-items: flex-end; }
+.fc-quiz-btn { flex: none; width: 58px; border: 0; border-left: 1px solid var(--line); background: var(--bg-soft); color: var(--accent); font: 700 13px var(--font); cursor: pointer; touch-action: manipulation; }
+.fc-quiz-btn:active { background: var(--accent-soft); }
+.fc-quiz-all { width: 100%; margin-top: 10px; }
+
+.fc-panel { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; background: var(--surface); }
+.fc-panel > summary { cursor: pointer; list-style: none; padding: 14px 0; font: 700 16px var(--font-head); display: flex; justify-content: space-between; align-items: center; min-height: 48px; }
+.fc-panel > summary::-webkit-details-marker { display: none; }
+.fc-panel > summary::after { content: '+'; font-size: 22px; color: var(--muted); }
+.fc-panel[open] > summary::after { content: '–'; }
+.fc-panel[open] { padding-bottom: 16px; }
+.fc-rules { margin: 0; padding-left: 20px; display: grid; gap: 10px; font-size: 15px; color: var(--ink-2); }
+.fc-setting { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 600; }
+.fc-stepper { display: inline-flex; align-items: center; border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; }
+.fc-stepper button { width: 48px; height: 44px; border: 0; background: var(--bg-soft); font: 700 20px var(--font); color: var(--ink); cursor: pointer; touch-action: manipulation; }
+.fc-stepper b { min-width: 44px; text-align: center; font-variant-numeric: tabular-nums; }
+.fc-panel .fc-row { margin-top: 12px; }
+.fc-restore { margin-top: 10px; display: grid; gap: 8px; }
+.fc-restore textarea { width: 100%; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg-soft); color: var(--ink); padding: 10px; font: 13px var(--mono); font-size: 16px; }
+.fc-msg { font-size: 14px; color: var(--good); margin-top: 8px; }
+.fc-msg:empty { display: none; }
+.fc-link-danger { margin-top: 14px; background: none; border: 0; color: var(--bad); font: 600 14px var(--font); padding: 8px 0; cursor: pointer; }
+
+/* ---------- full-screen study session ---------- */
+html.fc-locked, html.fc-locked body { overflow: hidden; overscroll-behavior: none; }
+.fc-session {
+  position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column;
+  height: 100vh; height: 100dvh; background: var(--bg); color: var(--ink);
+  padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
+}
+.fc-top { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 8px; padding: calc(env(safe-area-inset-top, 0px) + 6px) 12px 6px 6px; border-bottom: 1px solid var(--line); }
+.fc-x { width: 44px; height: 44px; border: 0; background: none; font-size: 20px; color: var(--ink-2); cursor: pointer; border-radius: 10px; touch-action: manipulation; }
+.fc-top-title { font: 700 15px var(--font-head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-quiz-pos { font: 700 14px var(--font); color: var(--muted); font-variant-numeric: tabular-nums; }
+.fc-progress { height: 3px; background: var(--bg-sunk); }
+.fc-progress span { display: block; height: 100%; background: var(--accent); transition: width .25s ease; }
+.fc-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.fc-card { max-width: 640px; margin: 0 auto; padding: 18px 18px 28px; }
+.fc-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 12.5px; }
+.fc-tag { font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.fc-tag-output, .fc-tag-debug { color: #a15c00; background: var(--warn-soft); }
+.fc-tag-order { color: var(--good); background: var(--good-soft); }
+.fc-deckname { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-q { font: 600 19px/1.45 var(--font); color: var(--ink); }
+.fc-q code, .fc-opt-t code, .fc-why code, .fc-back code, .fc-missed code, .fc-rules code { font: 600 .88em var(--mono); background: var(--inline-code); padding: .08em .35em; border-radius: 5px; overflow-wrap: anywhere; font-variant-ligatures: none; }
+.fc-code { margin: 14px 0 0; padding: 12px 14px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px; font: 14px/1.6 var(--mono); color: var(--code-ink); white-space: pre-wrap; overflow-wrap: anywhere; font-variant-ligatures: none; }
+.fc-options { display: grid; gap: 10px; margin-top: 18px; }
+.fc-opt {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: center; width: 100%; min-height: 56px;
+  padding: 12px 14px; text-align: left; border: 1.5px solid var(--line-2); border-radius: 14px; background: var(--surface);
+  color: var(--ink); font: 500 16px/1.4 var(--font); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.fc-opt:active:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); }
+.fc-opt-k { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--bg-sunk); font: 700 13px var(--font); color: var(--muted); }
+.fc-opt.is-correct { border-color: var(--good); background: var(--good-soft); }
+.fc-opt.is-correct .fc-opt-k { background: var(--good); color: #fff; }
+.fc-opt.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+.fc-opt.is-wrong .fc-opt-k { background: var(--bad); color: #fff; }
+.fc-opt.is-dim { opacity: .5; }
+.fc-why, .fc-back { margin-top: 16px; padding: 14px 16px; border-radius: 14px; background: var(--bg-soft); border: 1px solid var(--line); font-size: 16px; line-height: 1.55; color: var(--ink-2); animation: fc-in .2s ease; }
+.fc-back { background: var(--surface); }
+.fc-divider { display: none; }
+.fc-verdict { font: 800 16px var(--font-head); margin-bottom: 4px; }
+.fc-verdict.ok { color: var(--good); } .fc-verdict.no { color: var(--bad); }
+@keyframes fc-in { from { opacity: 0; transform: translateY(4px); } }
+
+.fc-actions { border-top: 1px solid var(--line); padding: 10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px); background: var(--bg); }
+.fc-actions > * { max-width: 640px; margin-left: auto; margin-right: auto; }
+.fc-hint { text-align: center; color: var(--muted); font-size: 14px; margin: 0; min-height: 48px; display: grid; place-items: center; }
+.fc-grades { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.fc-grades.single { grid-template-columns: 1fr; }
+.fc-grade {
+  min-height: 58px; border-radius: 14px; border: 0; cursor: pointer; display: grid; place-items: center; align-content: center; gap: 1px;
+  font: 700 16px var(--font); touch-action: manipulation; -webkit-tap-highlight-color: transparent; color: #fff;
+}
+.fc-grade small { font: 600 12px var(--font); opacity: .85; }
+.fc-grade:active { filter: brightness(.92); transform: scale(.98); }
+.fc-again { background: #dc2626; } .fc-hard { background: #6b7280; } .fc-good { background: #16a34a; } .fc-easy { background: #2563eb; }
+
+.fc-done { text-align: center; padding-top: 40px; }
+.fc-done h2 { font-size: 26px; margin: 6px 0; }
+.fc-done p { color: var(--ink-2); }
+.fc-done-emoji { font-size: 48px; }
+.fc-missed { list-style: none; padding: 0; margin: 18px 0 0; text-align: left; display: grid; gap: 8px; }
+.fc-missed li { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--surface); }
+.fc-missed-q { font-weight: 600; font-size: 15px; }
+.fc-missed-a { font-size: 14px; color: var(--good); margin-top: 4px; }
+
+@media (min-width: 720px) {
+  .fc-hero h1 { font-size: 40px; }
+  .fc-q { font-size: 21px; }
+  .fc-card { padding-top: 32px; }
+}
+@media (max-width: 380px) {
+  .fc-stats { grid-template-columns: repeat(2, 1fr); }
+  .fc-grade { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .fc-why, .fc-back { animation: none; } .fc-progress span { transition: none; } }
+.fc-top-right { display: flex; align-items: center; gap: 8px; }
+.fc-undo { height: 34px; padding: 0 10px; border-radius: 9px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink-2); font: 600 13px var(--font); cursor: pointer; touch-action: manipulation; white-space: nowrap; }
+
+/* round 2: critic fixes */
+.fc-study .fc-n { background: color-mix(in srgb, var(--accent-ink) 20%, transparent) !important; color: var(--accent-ink) !important; }
+.fc-hero-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.fc-gear { min-height: 36px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink-2); font: 600 13px var(--font); cursor: pointer; touch-action: manipulation; }
+.fc-warn { background: var(--warn-soft); border: 1px solid var(--warn-line); border-radius: 10px; padding: 10px 12px; font-size: 14px; color: var(--ink-2); margin: 0 0 12px; }
+.fc-more { margin-top: 10px; }
+.fc-limit-note { margin: -2px 0 10px; }
+.fc-deck.is-idle .fc-deck-name, .fc-deck.is-idle .fc-deck-emoji { opacity: .65; }
+.fc-idle { font: 700 12.5px var(--font); color: var(--good); white-space: nowrap; }
+.fc-tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.fc-queue { font-weight: 700; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.fc-queue-new { background: color-mix(in srgb, #3b82f6 14%, transparent); color: #2563eb; }
+.fc-queue-learn, .fc-queue-relearn { background: color-mix(in srgb, #ef4444 13%, transparent); color: #dc2626; }
+.fc-queue-review { background: color-mix(in srgb, #16a34a 14%, transparent); color: #15803d; }
+:root[data-theme="dark"] .fc-queue-new { color: #8ab4ff; } :root[data-theme="dark"] .fc-queue-learn, :root[data-theme="dark"] .fc-queue-relearn { color: #ff8f8f; } :root[data-theme="dark"] .fc-queue-review { color: #6fdc98; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fc-queue-new { color: #8ab4ff; } :root:not([data-theme="light"]) .fc-queue-learn, :root:not([data-theme="light"]) .fc-queue-relearn { color: #ff8f8f; } :root:not([data-theme="light"]) .fc-queue-review { color: #6fdc98; } }
+.fc-missed details > summary { list-style: none; cursor: pointer; }
+.fc-missed details > summary::-webkit-details-marker { display: none; }
+.fc-missed-you { font-size: 13.5px; color: var(--bad); margin-top: 2px; }
+.fc-missed-why { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); }
+.fc-missed details .fc-code { margin-top: 10px; }
+.fc-setting small { color: var(--muted); font-weight: 500; }
+
+.update-bar { position: fixed; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); z-index: 200; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--ink); color: var(--bg); font-weight: 600; box-shadow: var(--shadow-lg); }
+.update-bar button { min-height: 40px; padding: 0 16px; border-radius: 10px; border: 0; background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+html, body { overscroll-behavior-y: none; }
+@media (display-mode: standalone) { .fc-home { padding-top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<p class="offline-note">SQL Cards · version 202610281924 · <span id="net-status"></span></p>
+<div id="update-bar" class="update-bar" hidden><span>Update ready.</span><button type="button" id="update-btn">Refresh</button></div>
+<script>
+(function () {
+var highlight = (function () {
+// Tiny SQL highlighter + a textarea-over-pre editor. No dependencies.
+const KEYWORDS = new Set(`
+select from where and or not in is null like ilike between as on join inner left right full outer cross natural using
+group by order having limit offset distinct all any some exists case when then else end union intersect except with recursive
+insert into values update set delete create table view index drop alter add column primary key foreign references default
+unique check constraint asc desc nulls first last over partition rows range unbounded preceding following current row
+filter within lateral returning true false interval date time timestamp timestamptz numeric integer int bigint text varchar
+boolean real double precision cast explain analyze begin commit rollback similar to escape fetch next only ties window
+grouping sets rollup cube materialized if replace temp temporary jsonb json array zone at serial smallint char
+`.trim().split(/\s+/));
+
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+const TOKEN = /(--[^\n]*|\/\*[\s\S]*?(?:\*\/|$))|('(?:[^']|'')*'?)|("(?:[^"]|"")*"?)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_][A-Za-z0-9_]*)(\s*\()?|(::|<>|!=|<=|>=|\|\||->>?|#>>?|[=<>+\-*/%])|(\s+)|(.)/g;
+
+function highlight(sql) {
+  let out = '';
+  sql.replace(TOKEN, (m, comment, str, ident, num, word, paren, op, ws, other) => {
+    if (comment) out += `<span class="t-c">${esc(comment)}</span>`;
+    else if (str) out += `<span class="t-s">${esc(str)}</span>`;
+    else if (ident) out += `<span class="t-i">${esc(ident)}</span>`;
+    else if (num) out += `<span class="t-n">${num}</span>`;
+    else if (word) {
+      const lw = word.toLowerCase();
+      if (paren) out += `<span class="t-f">${esc(word)}</span>${esc(paren)}`;
+      else if (KEYWORDS.has(lw)) out += `<span class="t-k">${esc(word)}</span>`;
+      else out += esc(word);
+    }
+    else if (op) out += `<span class="t-o">${esc(op)}</span>`;
+    else out += esc(ws || other || '');
+    return m;
+  });
+  return out;
+}
+
+
+return highlight;
+})();
+// Spaced-repetition review: Anki-style scheduling (learning steps, ease factor, lapses)
+// plus a phone-first study UI. No imports and no network use, so this same file is
+// inlined into the standalone offline build.
+
+const MIN = 60e3, HOUR = 36e5, DAY = 864e5;
+const LEARN_STEPS = [1 * MIN, 10 * MIN];
+const RELEARN_STEPS = [10 * MIN];
+const GRADUATE_DAYS = 1, EASY_DAYS = 4, MAX_DAYS = 3650;
+const START_EASE = 2.5, MIN_EASE = 1.3;
+const LEARN_AHEAD = 20 * MIN;
+const ROLLOVER_HOUR = 4; // a review "day" starts at 4am, like Anki
+
+const GRADES = [
+  { g: 1, key: 'again', label: 'Again' },
+  { g: 2, key: 'hard', label: 'Hard' },
+  { g: 3, key: 'good', label: 'Good' },
+  { g: 4, key: 'easy', label: 'Easy' }
+];
+
+/* ---------- time helpers ---------- */
+function dayStart(t) {
+  const d = new Date(t - ROLLOVER_HOUR * HOUR);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime() + ROLLOVER_HOUR * HOUR;
+}
+function dayKey(t) {
+  const d = new Date(dayStart(t));
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+function fmtIvl(ms) {
+  if (ms < HOUR) return `${Math.max(1, Math.round(ms / MIN))}m`;
+  if (ms < DAY) return `${Math.round(ms / HOUR)}h`;
+  const d = ms / DAY;
+  if (d < 30) return `${Math.round(d)}d`;
+  if (d < 365) return `${(d / 30).toFixed(d < 300 ? 1 : 0).replace(/\.0$/, '')}mo`;
+  return `${(d / 365).toFixed(1).replace(/\.0$/, '')}y`;
+}
+
+/* ---------- scheduler ---------- */
+function graduate(c, days, now) {
+  c.q = 'review'; c.step = 0;
+  c.ivl = Math.min(MAX_DAYS, Math.max(1, Math.round(days)));
+  c.due = dayStart(now) + c.ivl * DAY;
+}
+
+// Returns a new card state after grading g (1 again, 2 hard, 3 good, 4 easy).
+function schedule(card, g, now = Date.now()) {
+  const c = { q: 'new', ivl: 0, ease: START_EASE, step: 0, reps: 0, lapses: 0, due: 0, ...card };
+  c.reps++;
+  if (c.q === 'new') { c.q = 'learn'; c.step = 0; c.ease = START_EASE; }
+  if (c.q === 'learn' || c.q === 'relearn') {
+    const steps = c.q === 'relearn' ? RELEARN_STEPS : LEARN_STEPS;
+    const step = Math.min(c.step, steps.length - 1);
+    if (g === 1) { c.step = 0; c.due = now + steps[0]; }
+    else if (g === 2) { c.step = step; c.due = now + (step === 0 && steps.length > 1 ? (steps[0] + steps[1]) / 2 : steps[step] * 1.5); }
+    else if (g === 3) {
+      if (step + 1 < steps.length) { c.step = step + 1; c.due = now + steps[c.step]; }
+      else graduate(c, c.q === 'relearn' ? Math.max(1, c.ivl) : GRADUATE_DAYS, now);
+    } else graduate(c, c.q === 'relearn' ? Math.max(1, c.ivl) + 1 : EASY_DAYS, now);
+    return c;
+  }
+  // review card
+  const late = Math.max(0, (dayStart(now) - c.due) / DAY);
+  if (g === 1) {
+    c.lapses++;
+    c.ease = Math.max(MIN_EASE, c.ease - 0.2);
+    c.ivl = Math.max(1, Math.round(c.ivl * 0.2));
+    c.q = 'relearn'; c.step = 0; c.due = now + RELEARN_STEPS[0];
+    return c;
+  }
+  const hard = Math.max(c.ivl + 1, Math.round(c.ivl * 1.2));
+  const good = Math.max(hard + 1, Math.round((c.ivl + late / 2) * c.ease));
+  const easy = Math.max(good + 1, Math.round((c.ivl + late) * c.ease * 1.3));
+  if (g === 2) c.ease = Math.max(MIN_EASE, c.ease - 0.15);
+  if (g === 4) c.ease += 0.15;
+  graduate(c, g === 2 ? hard : g === 3 ? good : easy, now);
+  return c;
+}
+
+function previewMs(card, g, now) {
+  const next = schedule(card, g, now);
+  return next.q === 'review' ? next.ivl * DAY : next.due - now;
+}
+
+/* ---------- persistence (per-viewer; falls back to memory) ---------- */
+function createStore(key) {
+  let mem = null;
+  const blank = () => ({ v: 1, cards: {}, days: {}, settings: { newPerDay: 15 } });
+  const load = () => {
+    if (mem) return mem;
+    try { mem = JSON.parse(localStorage.getItem(key)) || blank(); } catch { mem = blank(); }
+    mem.cards = mem.cards || {}; mem.days = mem.days || {}; mem.settings = { newPerDay: 15, ...(mem.settings || {}) };
+    return mem;
+  };
+  const save = () => { try { localStorage.setItem(key, JSON.stringify(mem)); } catch {} };
+  return {
+    get data() { return load(); },
+    save,
+    reset() { mem = blank(); save(); },
+    exportCode() { return btoa(unescape(encodeURIComponent(JSON.stringify(load())))); },
+    importCode(code) {
+      const parsed = JSON.parse(decodeURIComponent(escape(atob(code.trim()))));
+      if (!parsed || typeof parsed.cards !== 'object') throw new Error('Not a QueryPath backup');
+      mem = { ...blank(), ...parsed }; save();
+    }
+  };
+}
+
+/* ---------- UI ---------- */
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const TAG_LABEL = { syntax: 'Syntax', theory: 'Theory', output: 'Predict the output', debug: 'Spot the bug', order: 'Execution order', interview: 'Interview', postgres: 'PostgreSQL' };
+
+function shuffle(a) {
+  const r = a.slice();
+  for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; }
+  return r;
+}
+
+function mountReview(root, decks, { storageKey = 'qp.srs.v1', highlight = esc, onSessionChange } = {}) {
+  const store = createStore(storageKey);
+  // Round-robin across decks, so "All decks" introduces new cards from every topic, not deck 1 first.
+  const allCards = [];
+  const deckOf = {};
+  for (const d of decks) for (const c of d.cards) deckOf[c.id] = d;
+  for (let i = 0, more = true; more; i++) {
+    more = false;
+    for (const d of decks) if (i < d.cards.length) { allCards.push(d.cards[i]); more = true; }
+  }
+  const state = id => store.data.cards[id] || { q: 'new' };
+  let canSave = true;
+  try { localStorage.setItem('qp.srs.probe', '1'); canSave = localStorage.getItem('qp.srs.probe') === '1'; localStorage.removeItem('qp.srs.probe'); } catch { canSave = false; }
+
+  function today() {
+    const k = dayKey(Date.now());
+    const d = store.data.days;
+    return (d[k] = d[k] || { reviews: 0, correct: 0, newSeen: 0 });
+  }
+  function streak() {
+    const days = store.data.days;
+    let n = 0, t = Date.now();
+    if (!(days[dayKey(t)] && days[dayKey(t)].reviews)) t -= DAY; // today not done yet: count from yesterday
+    while (days[dayKey(t)] && days[dayKey(t)].reviews) { n++; t -= DAY; }
+    return n;
+  }
+  function counts(cards, now = Date.now()) {
+    const end = dayStart(now) + DAY;
+    let fresh = 0, learn = 0, due = 0;
+    for (const c of cards) {
+      const s = state(c.id);
+      if (s.q === 'new') fresh++;
+      else if (s.q === 'learn' || s.q === 'relearn') { if (s.due <= now + LEARN_AHEAD) learn++; }
+      else if (s.due < end) due++;
+    }
+    return { fresh: Math.min(fresh, newLeft()), freshTotal: fresh, learn, due };
+  }
+  // The daily new-card limit is shared by all decks (like Anki's parent-deck limit).
+  function newLeft() { return Math.max(0, store.data.settings.newPerDay + (today().extraNew || 0) - today().newSeen); }
+
+  // Next card: learning cards that are due, then reviews due today, then new cards (daily cap).
+  function nextCard(cards, now = Date.now()) {
+    let bestLearn = null, bestReview = null, firstNew = null;
+    const end = dayStart(now) + DAY;
+    for (const c of cards) {
+      const s = state(c.id);
+      if (s.q === 'learn' || s.q === 'relearn') { if (s.due <= now && (!bestLearn || s.due < state(bestLearn.id).due)) bestLearn = c; }
+      else if (s.q === 'review') { if (s.due < end && (!bestReview || s.due < state(bestReview.id).due)) bestReview = c; }
+      else if (!firstNew) firstNew = c;
+    }
+    if (bestLearn) return bestLearn;
+    if (bestReview) return bestReview;
+    if (firstNew && newLeft() > 0) return firstNew;
+    // nothing else left: allow learning cards due within the learn-ahead window
+    let ahead = null;
+    for (const c of cards) {
+      const s = state(c.id);
+      if ((s.q === 'learn' || s.q === 'relearn') && s.due <= now + LEARN_AHEAD && (!ahead || s.due < state(ahead.id).due)) ahead = c;
+    }
+    return ahead;
+  }
+  function nextDueAt(cards) {
+    let t = Infinity;
+    for (const c of cards) { const s = state(c.id); if (s.q !== 'new' && s.due < t) t = s.due; }
+    return t;
+  }
+
+  /* ----- home ----- */
+  function renderHome() {
+    closeSession();
+    const all = counts(allCards);
+    const t = today();
+    const acc = t.reviews ? Math.round(t.correct / t.reviews * 100) : null;
+    const learned = allCards.filter(c => state(c.id).q !== 'new').length;
+    const mature = allCards.filter(c => state(c.id).ivl >= 21).length;
+    const totalDue = all.fresh + all.learn + all.due;
+    root.innerHTML = `
+      <div class="fc-home">
+        <section class="fc-hero">
+          <div class="fc-hero-top"><div class="fc-kicker">Daily review · works offline</div><button type="button" class="fc-gear" data-act="settings" aria-label="Settings and backup">⚙︎ Settings</button></div>
+          <h1>Review</h1>
+          ${learned ? '' : `<p class="fc-lead">${allCards.length} cards across ${decks.length} decks. Clear today's reviews first, then learn a few new cards. Five minutes a day beats an hour on Sunday.</p>`}
+          ${canSave ? '' : `<p class="fc-warn">This viewer can't save progress between visits. Use Settings → Copy code before you close it.</p>`}
+          <div class="fc-stats">
+            <div><b>${streak()}</b><span>day streak</span></div>
+            <div><b>${t.reviews}</b><span>reviews today</span></div>
+            <div><b>${acc === null ? '–' : acc + '%'}</b><span>pass rate today</span></div>
+            <div><b>${learned}</b><span>cards started</span></div>
+          </div>
+          <button type="button" class="fc-btn fc-primary fc-study" data-act="study" ${totalDue ? '' : 'disabled'}>
+            ${totalDue ? `Study now <span class="fc-counts">${countPills(all)}</span>` : 'All caught up for today ✓'}
+          </button>
+          ${totalDue ? '' : `<p class="fc-sub">${nextDueText(allCards)}</p><div class="fc-row fc-more"><button type="button" class="fc-btn fc-ghost" data-act="more-new">Learn 10 more</button><button type="button" class="fc-btn fc-ghost" data-act="quiz">Quick quiz</button></div>`}
+        </section>
+
+        <section class="fc-decks" aria-label="Decks">
+          <div class="fc-section-h"><h2>Decks</h2><span class="fc-legend"><span class="fc-n fc-new">New</span><span class="fc-n fc-learn">Learning</span><span class="fc-n fc-due">Due</span></span></div>
+          <p class="fc-sub fc-limit-note">${newLeft()} of ${store.data.settings.newPerDay + (t.extraNew || 0)} new cards left today, shared across decks.</p>
+          <ul>${decks.map(d => {
+            const k = counts(d.cards);
+            const started = d.cards.filter(c => state(c.id).q !== 'new').length;
+            const pct = Math.round(started / d.cards.length * 100);
+            const idle = !(k.fresh + k.learn + k.due);
+            return `<li class="fc-deck${idle ? ' is-idle' : ''}">
+              <button type="button" class="fc-deck-main" data-act="study" data-deck="${d.id}">
+                <span class="fc-deck-emoji" aria-hidden="true">${d.emoji}</span>
+                <span class="fc-deck-text"><span class="fc-deck-name">${esc(d.name)}</span><span class="fc-deck-blurb">${esc(d.blurb)}</span>
+                  <span class="fc-bar" aria-label="${pct}% started"><span style="width:${pct}%"></span></span></span>
+                ${idle ? '<span class="fc-idle">✓ Done</span>' : `<span class="fc-counts">${countPills(k)}</span>`}
+              </button>
+              <button type="button" class="fc-quiz-btn" data-act="quiz" data-deck="${d.id}" aria-label="Quiz: ${esc(d.name)}">Quiz</button>
+            </li>`;
+          }).join('')}</ul>
+          <button type="button" class="fc-btn fc-ghost fc-quiz-all" data-act="quiz">Mixed quiz · 15 random questions</button>
+        </section>
+
+        <details class="fc-panel">
+          <summary>How to review like a warrior</summary>
+          <ol class="fc-rules">
+            <li><strong>Never skip a day.</strong> Reviews pile up fast. Five minutes on the train beats an hour on Sunday.</li>
+            <li><strong>Reviews before new cards.</strong> Study now always clears what's due first, then adds new cards.</li>
+            <li><strong>Grade honestly.</strong> A wrong answer always counts as Again. Got it right but slowly? Hard. Right with a little thought? Good. Instant? Easy.</li>
+            <li><strong>Keep new cards small.</strong> 10 to 20 a day keeps daily reviews under 15 minutes. Raise it only when reviews feel light.</li>
+            <li><strong>Read the explanation on every miss.</strong> The "why" is the lesson. Then move on; the card comes back in minutes.</li>
+          </ol>
+          <p class="fc-sub">Intervals grow each time you remember: 1 minute → 10 minutes → 1 day → 3 days → a week and beyond. Forgotten cards drop back into short steps.</p>
+        </details>
+
+        <details class="fc-panel" id="fc-settings">
+          <summary>Settings & backup</summary>
+          <div class="fc-setting">
+            <span>New cards per day <small>(all decks)</small></span>
+            <span class="fc-stepper"><button type="button" data-act="new-minus" aria-label="Fewer new cards">−</button><b data-new-limit>${store.data.settings.newPerDay}</b><button type="button" data-act="new-plus" aria-label="More new cards">+</button></span>
+          </div>
+          <p class="fc-sub">Progress is saved on this device only. ${learned} started · ${mature} mature (21+ day interval). To move progress to another device or the offline copy, copy a backup code here and restore it there.</p>
+          <div class="fc-row"><button type="button" class="fc-btn fc-ghost" data-act="backup">Copy code</button><button type="button" class="fc-btn fc-ghost" data-act="restore-open">Restore</button></div>
+          <div class="fc-msg" aria-live="polite"></div>
+          <div class="fc-restore" hidden>
+            <textarea id="fc-restore-input" rows="3" placeholder="Paste a backup code" aria-label="Backup code"></textarea>
+            <button type="button" class="fc-btn fc-primary" data-act="restore">Restore progress</button>
+          </div>
+          <button type="button" class="fc-link-danger" data-act="reset">Reset all review progress</button>
+        </details>
+      </div>`;
+  }
+
+  function countPills(k, labels) {
+    return `<span class="fc-n fc-new" title="New">${k.fresh}</span><span class="fc-n fc-learn" title="Learning">${k.learn}</span><span class="fc-n fc-due" title="Due">${k.due}</span>`;
+  }
+  function nextDueText(cards) {
+    const t = nextDueAt(cards);
+    if (!isFinite(t)) return 'No reviews scheduled yet.';
+    const ms = t - Date.now();
+    return ms <= 0 ? 'More cards are ready.' : `Next review in ${fmtIvl(ms)}.`;
+  }
+
+  /* ----- session overlay ----- */
+  let session = null;
+  function openOverlay() {
+    let ov = document.querySelector('.fc-session');
+    if (!ov) {
+      ov = document.createElement('div');
+      ov.className = 'fc-session';
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-modal', 'true');
+      document.body.appendChild(ov);
+    }
+    document.documentElement.classList.add('fc-locked');
+    // a history entry, so an iOS back-swipe ends the session instead of leaving the page
+    if (!(history.state && history.state.fcSession)) { try { history.pushState({ fcSession: true }, ''); } catch {} }
+    onSessionChange && onSessionChange(true);
+    return ov;
+  }
+  function exitSession() {
+    if (history.state && history.state.fcSession) history.back(); // popstate renders home
+    else renderHome();
+  }
+  function closeSession() {
+    session = null;
+    const ov = document.querySelector('.fc-session');
+    if (ov) ov.remove();
+    document.documentElement.classList.remove('fc-locked');
+    onSessionChange && onSessionChange(false);
+  }
+
+  function shell(ov, { title, right = '', progress = 0 }) {
+    ov.innerHTML = `
+      <div class="fc-top">
+        <button type="button" class="fc-x" data-act="exit" aria-label="End session">✕</button>
+        <div class="fc-top-title">${esc(title)}</div>
+        <div class="fc-top-right">${right}</div>
+      </div>
+      <div class="fc-progress"><span style="width:${Math.round(progress * 100)}%"></span></div>
+      <div class="fc-scroll"><article class="fc-card"></article></div>
+      <div class="fc-actions"></div>`;
+    return { card: ov.querySelector('.fc-card'), actions: ov.querySelector('.fc-actions'), scroll: ov.querySelector('.fc-scroll') };
+  }
+
+  const QUEUE_LABEL = { new: 'New', learn: 'Learning', relearn: 'Relearning', review: 'Review' };
+  function cardBody(c, order, queue) {
+    const tag = `<div class="fc-meta"><span class="fc-tags"><span class="fc-tag fc-tag-${c.tag}">${TAG_LABEL[c.tag] || c.tag}</span>${queue ? `<span class="fc-queue fc-queue-${queue}">${QUEUE_LABEL[queue]}</span>` : ''}</span><span class="fc-deckname">${deckOf[c.id].emoji} ${esc(deckOf[c.id].name)}</span></div>`;
+    const code = c.code ? `<pre class="fc-code"><code>${highlight(c.code.trim())}</code></pre>` : '';
+    if (c.type === 'recall') return `${tag}<div class="fc-q">${c.front}</div>${code}<div class="fc-back" hidden><div class="fc-divider"></div>${c.back}</div>`;
+    return `${tag}<div class="fc-q">${c.q}</div>${code}
+      <div class="fc-options" role="group" aria-label="Answers">${order.map((oi, i) =>
+        `<button type="button" class="fc-opt" data-opt="${oi}"><span class="fc-opt-k">${i + 1}</span><span class="fc-opt-t">${c.options[oi]}</span></button>`).join('')}</div>
+      <div class="fc-why" hidden></div>`;
+  }
+
+  function startStudy(deckId) {
+    const cards = deckId ? decks.find(d => d.id === deckId).cards : allCards;
+    session = { mode: 'study', cards, deckId, title: deckId ? decks.find(d => d.id === deckId).name : 'All decks', done: 0 };
+    showNext();
+  }
+
+  function showNext(forced) {
+    const ov = openOverlay();
+    const s = session;
+    const c = forced || nextCard(s.cards);
+    const k = counts(s.cards);
+    if (!c) return showDone(ov);
+    s.current = c;
+    s.revealed = false;
+    s.order = c.type === 'mcq' ? shuffle([0, 1, 2, 3]) : null;
+    const st = state(c.id);
+    const remaining = k.fresh + k.learn + k.due;
+    const { card, actions, scroll } = shell(ov, {
+      title: s.title,
+      right: `${s.undo ? '<button type="button" class="fc-undo" data-act="undo" aria-label="Undo last answer">↶ Undo</button>' : ''}<span class="fc-counts">${countPills(k)}</span>`,
+      progress: s.done / (s.done + remaining || 1)
+    });
+    card.innerHTML = cardBody(c, s.order, st.q);
+    card.dataset.queue = st.q;
+    scroll.scrollTop = 0;
+    s.shownAt = Date.now();
+    if (c.type === 'recall') {
+      actions.innerHTML = `<button type="button" class="fc-btn fc-primary fc-wide" data-act="show">Show answer</button>`;
+    } else {
+      actions.innerHTML = `<p class="fc-hint">Pick an answer</p>`;
+    }
+  }
+
+  function reveal(chosen) {
+    const s = session, c = s.current;
+    if (!s || s.revealed) return;
+    s.revealed = true;
+    const ov = document.querySelector('.fc-session');
+    const actions = ov.querySelector('.fc-actions');
+    let correct = true;
+    if (c.type === 'mcq') {
+      correct = chosen === c.answer;
+      ov.querySelectorAll('.fc-opt').forEach(b => {
+        const oi = +b.dataset.opt;
+        b.disabled = true;
+        if (oi === c.answer) b.classList.add('is-correct');
+        else if (oi === chosen) b.classList.add('is-wrong');
+        else b.classList.add('is-dim');
+      });
+      const why = ov.querySelector('.fc-why');
+      why.hidden = false;
+      why.innerHTML = `<div class="fc-verdict ${correct ? 'ok' : 'no'}">${correct ? '✓ Correct' : '✗ Not quite'}</div>${c.why}`;
+      requestAnimationFrame(() => why.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
+    } else {
+      ov.querySelector('.fc-back').hidden = false;
+    }
+    s.correct = correct;
+    const st = state(c.id), now = Date.now();
+    // honest grading: a wrong multiple-choice answer can only be "Again"
+    // honest grading: a wrong multiple-choice answer can only be "Again", and a slow first answer can't be "Easy"
+    let grades = c.type === 'mcq' && !correct ? GRADES.slice(0, 1) : GRADES;
+    if (c.type === 'mcq' && correct && st.q === 'new' && Date.now() - s.shownAt > 8000) grades = GRADES.slice(0, 3);
+    actions.innerHTML = `<div class="fc-grades${grades.length === 1 ? ' single' : ''}">${grades.map(x =>
+      `<button type="button" class="fc-grade fc-${x.key}" data-grade="${x.g}"><span>${x.label}</span><small>${fmtIvl(previewMs(st, x.g, now))}</small></button>`).join('')}</div>`;
+  }
+
+  function grade(g) {
+    const s = session;
+    if (!s || !s.revealed) return;
+    const c = s.current;
+    const t = today();
+    const before = state(c.id);
+    s.undo = { card: c, prev: store.data.cards[c.id], day: { ...t } };
+    if (before.q === 'new') t.newSeen++;
+    t.reviews++;
+    if (g > 1) t.correct++;
+    store.data.cards[c.id] = schedule(before, g, Date.now());
+    store.save();
+    s.done++;
+    showNext();
+  }
+
+  function showDone(ov) {
+    const s = session;
+    const t = today();
+    const { card, actions } = shell(ov, { title: s.title, progress: 1 });
+    card.classList.add('fc-done');
+    card.innerHTML = `<div class="fc-done-emoji" aria-hidden="true">🏁</div>
+      <h2>${s.done ? 'Session complete' : 'Nothing due right now'}</h2>
+      <p>${s.done ? `You reviewed ${s.done} card${s.done === 1 ? '' : 's'} this session.` : 'This deck has no cards due and no new cards left for today.'}</p>
+      <div class="fc-stats small">
+        <div><b>${streak()}</b><span>day streak</span></div>
+        <div><b>${t.reviews}</b><span>today</span></div>
+        <div><b>${t.reviews ? Math.round(t.correct / t.reviews * 100) + '%' : '–'}</b><span>correct</span></div>
+      </div>
+      <p class="fc-sub">${nextDueText(s.cards)}</p>`;
+    actions.innerHTML = `<div class="fc-row">${newLeft() === 0 && s.cards.some(c => state(c.id).q === 'new') ? '<button type="button" class="fc-btn fc-ghost" data-act="more-new">Learn 10 more</button>' : ''}<button type="button" class="fc-btn fc-ghost" data-act="quiz-from-done">${s.deckId ? 'Quiz this deck' : 'Take a quiz'}</button><button type="button" class="fc-btn fc-primary" data-act="exit">Done</button></div>`;
+  }
+
+  /* ----- quiz mode (no scheduling, just practice) ----- */
+  function startQuiz(deckId) {
+    const pool = (deckId ? decks.find(d => d.id === deckId).cards : allCards).filter(c => c.type === 'mcq');
+    const qs = shuffle(pool).slice(0, deckId ? Math.min(10, pool.length) : 15);
+    session = { mode: 'quiz', qs, i: 0, score: 0, missed: [], title: `Quiz · ${deckId ? decks.find(d => d.id === deckId).name : 'Mixed'}` };
+    showQuiz();
+  }
+  function showQuiz() {
+    const ov = openOverlay();
+    const s = session;
+    if (s.i >= s.qs.length) return showQuizEnd(ov);
+    const c = s.current = s.qs[s.i];
+    s.revealed = false;
+    s.order = shuffle([0, 1, 2, 3]);
+    const { card, actions, scroll } = shell(ov, { title: s.title, right: `<span class="fc-quiz-pos">${s.i + 1}/${s.qs.length}</span>`, progress: s.i / s.qs.length });
+    card.innerHTML = cardBody(c, s.order);
+    scroll.scrollTop = 0;
+    actions.innerHTML = `<p class="fc-hint">Pick an answer</p>`;
+  }
+  function quizReveal(chosen) {
+    const s = session, c = s.current;
+    if (s.revealed) return;
+    s.revealed = true;
+    const ov = document.querySelector('.fc-session');
+    const ok = chosen === c.answer;
+    if (ok) s.score++; else s.missed.push({ c, chosen });
+    ov.querySelectorAll('.fc-opt').forEach(b => {
+      const oi = +b.dataset.opt; b.disabled = true;
+      b.classList.add(oi === c.answer ? 'is-correct' : oi === chosen ? 'is-wrong' : 'is-dim');
+    });
+    const why = ov.querySelector('.fc-why');
+    why.hidden = false;
+    why.innerHTML = `<div class="fc-verdict ${ok ? 'ok' : 'no'}">${ok ? '✓ Correct' : '✗ Not quite'}</div>${c.why}`;
+    requestAnimationFrame(() => why.scrollIntoView({ block: 'nearest', behavior: 'smooth' }));
+    ov.querySelector('.fc-actions').innerHTML = `<button type="button" class="fc-btn fc-primary fc-wide" data-act="quiz-next">${s.i + 1 < s.qs.length ? 'Next question' : 'See results'}</button>`;
+  }
+  function showQuizEnd(ov) {
+    const s = session;
+    const pct = Math.round(s.score / s.qs.length * 100);
+    const { card, actions } = shell(ov, { title: s.title, progress: 1 });
+    card.classList.add('fc-done');
+    card.innerHTML = `<div class="fc-done-emoji" aria-hidden="true">${pct === 100 ? '🏆' : pct >= 70 ? '🎯' : '📚'}</div>
+      <h2>${s.score} / ${s.qs.length} correct</h2>
+      <p>${pct === 100 ? 'Flawless.' : pct >= 70 ? 'Solid. Review the misses below.' : 'These need work. Send the misses to your review queue.'}</p>
+      ${s.missed.length ? `<ul class="fc-missed">${s.missed.map(({ c, chosen }) => `<li><details><summary><div class="fc-missed-q">${c.q}</div><div class="fc-missed-a">Answer: ${c.options[c.answer]}</div><div class="fc-missed-you">You picked: ${c.options[chosen]}</div></summary>${c.code ? `<pre class="fc-code"><code>${highlight(c.code.trim())}</code></pre>` : ''}<div class="fc-missed-why">${c.why}</div></details></li>`).join('')}</ul>` : ''}`;
+    actions.innerHTML = `<div class="fc-row">${s.missed.length ? `<button type="button" class="fc-btn fc-ghost" data-act="queue-missed">Redo misses</button>` : ''}<button type="button" class="fc-btn fc-primary" data-act="exit">Done</button></div>`;
+  }
+  function queueMissed() {
+    const now = Date.now();
+    for (const c of session.missed) {
+      const st = state(c.id);
+      store.data.cards[c.id] = st.q === 'new' ? schedule(st, 1, now - LEARN_STEPS[0]) : { ...st, due: Math.min(st.due, now), q: st.q === 'review' ? 'relearn' : st.q, step: 0 };
+    }
+    store.save();
+    const missedIds = new Set(session.missed.map(c => c.id));
+    session = { mode: 'study', cards: allCards.filter(c => missedIds.has(c.id)), title: 'Missed questions', done: 0 };
+    showNext();
+  }
+
+  /* ----- events ----- */
+  function onClick(e) {
+    const t = e.target.closest('[data-act], [data-opt], [data-grade]');
+    if (!t) return;
+    if (t.dataset.opt !== undefined) {
+      if (!session) return;
+      return session.mode === 'quiz' ? quizReveal(+t.dataset.opt) : reveal(+t.dataset.opt);
+    }
+    if (t.dataset.grade) return grade(+t.dataset.grade);
+    const act = t.dataset.act;
+    const msg = root.querySelector('.fc-msg');
+    switch (act) {
+      case 'study': startStudy(t.dataset.deck); break;
+      case 'settings': { const p = root.querySelector('#fc-settings'); p.open = true; p.scrollIntoView({ behavior: 'smooth', block: 'start' }); break; }
+      case 'more-new': today().extraNew = (today().extraNew || 0) + 10; store.save(); if (session) { session.done = session.done; showNext(); } else startStudy(); break;
+      case 'quiz': startQuiz(t.dataset.deck); break;
+      case 'quiz-from-done': startQuiz((session && session.deckId) || undefined); break;
+      case 'show': reveal(); break;
+      case 'quiz-next': session.i++; showQuiz(); break;
+      case 'queue-missed': queueMissed(); break;
+      case 'exit': exitSession(); break;
+      case 'undo': {
+        const u = session && session.undo;
+        if (!u) break;
+        if (u.prev) store.data.cards[u.card.id] = u.prev; else delete store.data.cards[u.card.id];
+        store.data.days[dayKey(Date.now())] = u.day;
+        store.save();
+        session.undo = null;
+        session.done = Math.max(0, session.done - 1);
+        showNext(u.card);
+        break;
+      }
+      case 'new-minus': case 'new-plus': {
+        const s = store.data.settings;
+        s.newPerDay = Math.max(0, Math.min(100, s.newPerDay + (act === 'new-plus' ? 5 : -5)));
+        store.save();
+        root.querySelector('[data-new-limit]').textContent = s.newPerDay; // update in place so the stepper doesn't jump
+        const note = root.querySelector('.fc-limit-note');
+        if (note) note.textContent = `${newLeft()} of ${s.newPerDay + (today().extraNew || 0)} new cards left today, shared across decks.`;
+        break;
+      }
+      case 'backup': {
+        const code = store.exportCode();
+        const done = ok => { msg.textContent = ok ? 'Backup code copied. Paste it into Restore on your other device.' : 'Copy this code:'; if (!ok) { const ta = root.querySelector('#fc-restore-input'); root.querySelector('.fc-restore').hidden = false; ta.value = code; ta.select(); } };
+        try { navigator.clipboard.writeText(code).then(() => done(true), () => done(false)); } catch { done(false); }
+        break;
+      }
+      case 'restore-open': root.querySelector('.fc-restore').hidden = false; root.querySelector('#fc-restore-input').focus(); break;
+      case 'restore':
+        if (!t.dataset.armed) {
+          let n = '?';
+          try { n = Object.keys(JSON.parse(decodeURIComponent(escape(atob(root.querySelector('#fc-restore-input').value.trim())))).cards || {}).length; } catch { msg.textContent = 'That code did not work. Copy the whole backup code and try again.'; break; }
+          t.dataset.armed = '1';
+          t.textContent = `Replace ${Object.keys(store.data.cards).length} cards here with ${n} from the code?`;
+          break;
+        }
+        try { store.importCode(root.querySelector('#fc-restore-input').value); renderHome(); openPanel(1); root.querySelector('.fc-msg').textContent = 'Progress restored.'; }
+        catch { msg.textContent = 'That code did not work. Copy the whole backup code and try again.'; }
+        break;
+      case 'reset':
+        if (t.dataset.armed) { store.reset(); renderHome(); }
+        else { t.dataset.armed = '1'; t.textContent = 'Tap again to erase all review progress'; }
+        break;
+    }
+  }
+  function openPanel(i) { const p = root.querySelectorAll('.fc-panel')[i]; if (p) p.open = true; }
+  function onKey(e) {
+    if (!session || /input|textarea/i.test(document.activeElement.tagName)) return;
+    const n = parseInt(e.key, 10);
+    if (e.key === 'Escape') { exitSession(); return; }
+    if (!session.revealed) {
+      if (session.current && session.current.type === 'mcq' && n >= 1 && n <= 4) {
+        const oi = session.order[n - 1];
+        session.mode === 'quiz' ? quizReveal(oi) : reveal(oi);
+      } else if ((e.key === ' ' || e.key === 'Enter') && session.current && session.current.type === 'recall') { e.preventDefault(); reveal(); }
+    } else if (session.mode === 'study' && n >= 1 && n <= 4 && document.querySelector(`.fc-grade[data-grade="${n}"]`)) grade(n);
+    else if (session.mode === 'study' && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); const b = document.querySelector('.fc-grade.fc-good') || document.querySelector('.fc-grade'); b && grade(+b.dataset.grade); }
+    else if (session.mode === 'quiz' && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); session.i++; showQuiz(); }
+  }
+
+  const onPop = () => { if (session) renderHome(); };
+  window.addEventListener('popstate', onPop);
+  root.addEventListener('click', onClick);
+  const ovClick = e => { if (e.target.closest('.fc-session')) onClick(e); };
+  document.addEventListener('click', ovClick);
+  document.addEventListener('keydown', onKey);
+  renderHome();
+  return {
+    destroy() {
+      closeSession();
+      root.removeEventListener('click', onClick);
+      document.removeEventListener('click', ovClick);
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('popstate', onPop);
+    },
+    // test hooks
+    _store: store, _schedule: schedule
+  };
+}
+
+var DECKS = [];
+DECKS.push({
+  id: 'select-filter',
+  name: 'SELECT & Filtering',
+  emoji: '🔦',
+  blurb: 'Aliases, WHERE, precedence, BETWEEN, LIKE, ORDER BY, LIMIT, quoting.',
+  cards: [
+    { id: 'select-filter-01', type: 'mcq', tag: 'order',
+      q: `Which is the logical evaluation order of these clauses in PostgreSQL?`,
+      options: [`FROM, WHERE, SELECT, ORDER BY, LIMIT`, `SELECT, FROM, WHERE, ORDER BY, LIMIT`, `FROM, SELECT, WHERE, ORDER BY, LIMIT`, `FROM, WHERE, ORDER BY, SELECT, LIMIT`],
+      answer: 0,
+      why: `Rows are read (FROM), filtered (WHERE), then projected (SELECT), sorted, and trimmed (LIMIT). Writing SELECT first is only syntax; it does not run first.` },
+
+    { id: 'select-filter-02', type: 'mcq', tag: 'debug',
+      q: `This fails with: column "doubled" does not exist. Why?`,
+      code: `SELECT price * 2 AS doubled
+FROM (VALUES (5), (10)) AS t(price)
+WHERE doubled > 15;`,
+      noRun: true,
+      options: [`Aliases only work in the same clause that defines them`, `WHERE runs before SELECT, so the alias is not defined yet`, `The alias must be double-quoted when used inside WHERE`, `Expressions such as price * 2 cannot be given aliases`],
+      answer: 1,
+      why: `WHERE is evaluated before SELECT computes the alias. Repeat the expression or filter in a subquery or CTE. Quoting the alias would not help; it only makes the name an identifier lookup.` },
+
+    { id: 'select-filter-03', type: 'mcq', tag: 'output',
+      q: `What does this return, in row order?`,
+      code: `SELECT x * 2 AS d
+FROM generate_series(1, 3) AS x
+ORDER BY d DESC;`,
+      options: [`Error: alias d is unknown in ORDER BY`, `2, 4, 6`, `6, 4, 2`, `3, 2, 1`],
+      answer: 2,
+      why: `ORDER BY runs after SELECT, so it may use output aliases. The values are 2, 4, 6 and DESC reverses them. Sorting by x would give 3, 2, 1.` },
+
+    { id: 'select-filter-04', type: 'mcq', tag: 'debug',
+      q: `You wanted two columns but forgot the comma. What does PostgreSQL do?`,
+      code: `SELECT first_name last_name
+FROM (VALUES ('Ada')) AS t(first_name);`,
+      options: [`Raises a syntax error at last_name`, `Returns first_name and last_name as two columns`, `Raises: column "last_name" does not exist`, `Returns one column named last_name with the values`],
+      answer: 3,
+      why: `AS is optional, so the second word is an alias: first_name AS last_name. The query is valid and returns one column, which is why this bug slips through.` },
+
+    { id: 'select-filter-05', type: 'mcq', tag: 'output',
+      q: `Which rows are returned?`,
+      code: `SELECT n FROM generate_series(1, 3) AS n
+WHERE n = 1 OR n = 2 AND n = 3;`,
+      options: [`Only 1`, `No rows`, `1 and 2`, `1, 2 and 3`],
+      answer: 0,
+      why: `AND binds tighter than OR, so this is n = 1 OR (n = 2 AND n = 3), which keeps only 1. Reading it left to right as (n = 1 OR n = 2) AND n = 3 would give no rows.` },
+
+    { id: 'select-filter-06', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT count(*)
+FROM generate_series(1, 10) AS n
+WHERE n BETWEEN 3 AND 6;`,
+      options: [`2`, `4`, `3`, `5`],
+      answer: 1,
+      why: `BETWEEN is inclusive on both ends, so it matches 3, 4, 5 and 6. Treating the bounds as exclusive would give 2.` },
+
+    { id: 'select-filter-07', type: 'mcq', tag: 'debug',
+      q: `The row exists, yet this returns zero rows. Why?`,
+      code: `SELECT ts FROM (VALUES
+  ('2025-01-31 15:00'::timestamp)) AS v(ts)
+WHERE ts BETWEEN '2025-01-01'
+  AND '2025-01-31';`,
+      options: [`BETWEEN treats the upper bound as exclusive for timestamps`, `A date string cannot be compared with a timestamp column`, `The bound '2025-01-31' is midnight, so 15:00 is past it`, `BETWEEN compares only the date part of timestamp values`],
+      answer: 2,
+      why: `The string becomes 2025-01-31 00:00:00, so anything later that day is outside the range. BETWEEN is inclusive, but only up to that midnight instant.` },
+
+    { id: 'select-filter-08', type: 'mcq', tag: 'interview',
+      q: `Which filter selects every row in January 2025 from a timestamp column ts?`,
+      options: [`ts BETWEEN '2025-01-01' AND '2025-01-31'`, `ts BETWEEN '2025-01-01' AND '2025-02-01'`, `ts > '2025-01-01' AND ts < '2025-01-31 23:59'`, `ts >= '2025-01-01' AND ts < '2025-02-01'`],
+      answer: 3,
+      why: `A half-open range covers all of January with no gaps. The BETWEEN versions either drop most of Jan 31 or wrongly include midnight on Feb 1.` },
+
+    { id: 'select-filter-09', type: 'mcq', tag: 'output',
+      q: `How many rows does this return?`,
+      code: `SELECT n FROM generate_series(1, 5) AS n
+WHERE n IN (2, 4, 4, 9);`,
+      options: [`2 rows`, `3 rows`, `4 rows`, `An error for the duplicate 4`],
+      answer: 0,
+      why: `IN is a membership test applied per table row, so each of n = 2 and n = 4 matches once. Duplicates or unmatched values in the list do not add or remove rows.` },
+
+    { id: 'select-filter-10', type: 'mcq', tag: 'theory',
+      q: `In a LIKE pattern, what does the underscore _ match?`,
+      options: [`Zero or more characters`, `Exactly one character`, `One or more characters`, `A literal underscore only`],
+      answer: 1,
+      why: `_ matches exactly one character; % matches any run, including an empty one. Matching a literal underscore needs an escape, so the last option is wrong.` },
+
+    { id: 'select-filter-11', type: 'mcq', tag: 'postgres',
+      q: `What are a and b?`,
+      code: `SELECT 'Postgres' LIKE 'post%' AS a,
+       'Postgres' ILIKE 'post%' AS b;`,
+      options: [`a = true, b = true`, `a = true, b = false`, `a = false, b = true`, `a = false, b = false`],
+      answer: 2,
+      why: `LIKE is case-sensitive, so 'P' does not match 'p'. ILIKE is the PostgreSQL case-insensitive variant and matches.` },
+
+    { id: 'select-filter-12', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, which character escapes % or _ in a LIKE pattern when no ESCAPE clause is given?`,
+      options: [`Caret (^)`, `Doubled percent (%%)`, `None; ESCAPE is mandatory`, `Backslash (\\)`],
+      answer: 3,
+      why: `The default LIKE escape character is the backslash, so 'a\\%b' matches the literal text a%b. ESCAPE is optional and only needed to choose a different character.` },
+
+    { id: 'select-filter-13', type: 'mcq', tag: 'output',
+      q: `In what order does column b come out?`,
+      code: `SELECT b FROM (VALUES (1,'x'), (2,'y'),
+  (1,'z'), (2,'w')) AS t(a, b)
+ORDER BY a DESC, b;`,
+      options: [`w, y, x, z`, `y, w, z, x`, `x, z, w, y`, `z, x, y, w`],
+      answer: 0,
+      why: `a sorts descending (2s first), then b ascending within each a. DESC applies only to the key it follows, so b stays ascending; applying it to both keys would give y, w, z, x.` },
+
+    { id: 'select-filter-14', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, where do NULLs appear with ORDER BY x ASC if you give no NULLS option?`,
+      options: [`First, because NULL sorts as smaller than any value`, `Last, because NULL sorts as larger than any value`, `Last, but only if the column is indexed`, `Position is undefined and varies per query`],
+      answer: 1,
+      why: `PostgreSQL treats NULL as larger than every value: last for ASC, first for DESC. SQL Server and MySQL put NULLs first for ASC, which is the tempting wrong answer.` },
+
+    { id: 'select-filter-15', type: 'mcq', tag: 'output',
+      q: `In what order are the values returned in PostgreSQL?`,
+      code: `SELECT x
+FROM (VALUES (1), (NULL), (3)) AS t(x)
+ORDER BY x DESC;`,
+      options: [`3, 1, NULL`, `NULL, 1, 3`, `NULL, 3, 1`, `3, NULL, 1`],
+      answer: 2,
+      why: `NULL counts as the largest value, so descending order puts it first. 3, 1, NULL is what you get with DESC NULLS LAST.` },
+
+    { id: 'select-filter-16', type: 'mcq', tag: 'output',
+      q: `Which row comes first?`,
+      code: `SELECT a, b
+FROM (VALUES (1,'z'), (2,'a')) AS t(a, b)
+ORDER BY 2;`,
+      options: [`1, z`, `Error: ORDER BY needs a column name`, `Neither; 2 is treated as a constant`, `2, a`],
+      answer: 3,
+      why: `A bare integer in ORDER BY is a position in the select list, so this sorts by b and 'a' comes before 'z'. Positions are legal here but fragile if the select list changes.` },
+
+    { id: 'select-filter-17', type: 'mcq', tag: 'postgres',
+      q: `This fails in PostgreSQL with: column "d" does not exist. Why?`,
+      code: `SELECT x * 2 AS d
+FROM generate_series(1, 3) AS x
+ORDER BY d + 1;`,
+      noRun: true,
+      options: [`Aliases work in ORDER BY alone, but not inside an expression`, `ORDER BY cannot contain arithmetic of any kind`, `ORDER BY only sees table columns, never SELECT aliases`, `d + 1 must be wrapped in parentheses to be an expression`],
+      answer: 0,
+      why: `An output alias is allowed only as the whole ORDER BY item. Inside an expression, use x * 2 + 1. ORDER BY d alone works, so "never sees aliases" is wrong.` },
+
+    { id: 'select-filter-18', type: 'mcq', tag: 'output',
+      q: `Which values are returned?`,
+      code: `SELECT n
+FROM generate_series(1, 10) AS n
+ORDER BY n
+LIMIT 3 OFFSET 4;`,
+      options: [`4, 5, 6`, `5, 6, 7`, `4, 5, 6, 7`, `5, 6, 7, 8`],
+      answer: 1,
+      why: `OFFSET 4 skips 1 to 4, then LIMIT 3 returns 5, 6, 7. Starting at 4 confuses OFFSET with a starting row number.` },
+
+    { id: 'select-filter-19', type: 'mcq', tag: 'interview',
+      q: `Interview: what does SELECT * FROM t LIMIT 5 return when there is no ORDER BY?`,
+      options: [`The 5 oldest rows by insertion time`, `The 5 rows with the smallest primary key`, `Any 5 rows; which ones is not guaranteed`, `An error, because LIMIT requires ORDER BY`],
+      answer: 2,
+      why: `Without ORDER BY, row order is unspecified and can change with plans, vacuuming, or parallelism. Insertion order often appears to hold, but it is never guaranteed.` },
+
+    { id: 'select-filter-20', type: 'mcq', tag: 'syntax',
+      q: `Which is the SQL-standard syntax, supported by PostgreSQL, for "only the first 5 rows"?`,
+      options: [`SELECT TOP 5 ...`, `WHERE ROWNUM <= 5`, `FIRST 5 ROWS ONLY`, `FETCH FIRST 5 ROWS ONLY`],
+      answer: 3,
+      why: `FETCH FIRST n ROWS ONLY is standard and equals LIMIT n. TOP is SQL Server and ROWNUM is Oracle; neither works in PostgreSQL.` },
+
+    { id: 'select-filter-21', type: 'mcq', tag: 'output',
+      q: `How many rows are returned?`,
+      code: `SELECT s
+FROM (VALUES (90), (80), (80), (70)) AS t(s)
+ORDER BY s DESC
+FETCH FIRST 2 ROWS WITH TIES;`,
+      options: [`3 rows`, `2 rows`, `4 rows`, `1 row`],
+      answer: 0,
+      why: `WITH TIES also returns rows that tie with the last row of the first 2. The second 80 ties with the first 80, giving 90, 80, 80. Plain LIMIT 2 would return 2 rows.` },
+
+    { id: 'select-filter-22', type: 'mcq', tag: 'debug',
+      q: `This fails with: column "Ada" does not exist. What is the fix?`,
+      code: `SELECT * FROM (VALUES ('Ada')) AS t(name)
+WHERE name = "Ada";`,
+      noRun: true,
+      options: [`Use LIKE instead of =`, `Use single quotes: name = 'Ada'`, `Cast the literal: name = "Ada"::text`, `Wrap it in parentheses: name = ("Ada")`],
+      answer: 1,
+      why: `Single quotes make string literals; double quotes make identifiers, so "Ada" is read as a column. LIKE and casts do not change how the quotes are parsed.` },
+
+    { id: 'select-filter-23', type: 'mcq', tag: 'postgres',
+      q: `A column is named "first name" (with a space). Which query reads it in PostgreSQL?`,
+      options: [`SELECT first name FROM t`, `SELECT 'first name' FROM t`, `SELECT "first name" FROM t`, `SELECT [first name] FROM t`],
+      answer: 2,
+      why: `Double quotes make an identifier, so spaces are allowed. Unquoted, first name parses as column first with alias name; single quotes return the text; brackets are SQL Server.` },
+
+    { id: 'select-filter-24', type: 'mcq', tag: 'syntax',
+      q: `Which literal is the string O'Reilly in standard PostgreSQL?`,
+      options: [`"O'Reilly"`, `'O"Reilly'`, `'O\\'Reilly'`, `'O''Reilly'`],
+      answer: 3,
+      why: `A single quote inside a string is doubled. Backslash escaping works only in E'...' strings, not in regular ones, and double quotes would make an identifier.` },
+
+    { id: 'select-filter-r01', type: 'recall', tag: 'theory',
+      front: `Rank NOT, AND and OR from highest to lowest precedence.`,
+      back: `NOT first, then AND, then OR. So <code>a OR b AND c</code> means <code>a OR (b AND c)</code>. Add parentheses whenever you mix AND and OR.` },
+
+    { id: 'select-filter-r02', type: 'recall', tag: 'syntax',
+      front: `Write a filter for all of March 2025 on a timestamp column ts.`,
+      back: `<code>ts &gt;= '2025-03-01' AND ts &lt; '2025-04-01'</code><br>A half-open range avoids the BETWEEN end-of-day trap.` },
+
+    { id: 'select-filter-r03', type: 'recall', tag: 'postgres',
+      front: `Where do NULLs sort by default with ORDER BY in PostgreSQL?`,
+      back: `NULL counts as the largest value: last for ASC, first for DESC. Override with <code>NULLS FIRST</code> or <code>NULLS LAST</code>.` },
+
+    { id: 'select-filter-r04', type: 'recall', tag: 'syntax',
+      front: `What do the LIKE wildcards % and _ match?`,
+      back: `<code>%</code> matches any run of characters, even none; <code>_</code> matches exactly one character.` },
+
+    { id: 'select-filter-r05', type: 'recall', tag: 'interview',
+      front: `In PostgreSQL, what do single quotes make, and what do double quotes make?`,
+      back: `Single quotes make string literals (<code>'Ada'</code>); double quotes make identifiers (<code>"Total"</code>).` }
+  ]
+});
+DECKS.push({
+  id: 'null-types',
+  name: 'NULLs & Data Types',
+  emoji: '🚫',
+  blurb: 'Three-valued logic, COALESCE, NOT IN traps, numeric types, casts, dates.',
+  cards: [
+    { id: 'null-types-01', type: 'mcq', tag: 'debug',
+      q: `What does this return?`,
+      code: `SELECT count(*)
+FROM (VALUES (1), (NULL)) AS t(x)
+WHERE x = NULL;`,
+      options: [`0`, `1`, `2`, `Error: use IS NULL`],
+      answer: 0,
+      why: `x = NULL evaluates to NULL for every row, and WHERE keeps only true rows. Use x IS NULL. PostgreSQL does not raise an error for = NULL; it silently matches nothing.` },
+
+    { id: 'null-types-02', type: 'mcq', tag: 'theory',
+      q: `What does this return?`,
+      code: `SELECT NULL AND false AS r;`,
+      options: [`NULL`, `false`, `true`, `Error: NULL is not boolean`],
+      answer: 1,
+      why: `Three-valued logic: false AND anything is false, since no value of the unknown could make it true. NULL AND true would be NULL.` },
+
+    { id: 'null-types-03', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT 5 + NULL AS r;`,
+      options: [`5`, `0`, `NULL`, `Error: type mismatch`],
+      answer: 2,
+      why: `Any arithmetic with NULL yields NULL, because the result is unknown. NULL is not treated as 0.` },
+
+    { id: 'null-types-04', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT 'a'::text || NULL || 'b' AS r;`,
+      options: [`'ab'`, `'a'`, `'anullb'`, `NULL`],
+      answer: 3,
+      why: `The || operator returns NULL if either side is NULL. It does not skip the NULL, and it never writes the word null.` },
+
+    { id: 'null-types-05', type: 'mcq', tag: 'postgres',
+      q: `What does the function concat('a', NULL, 'b') return in PostgreSQL?`,
+      options: [`'ab'`, `NULL`, `'a'`, `'anullb'`],
+      answer: 0,
+      why: `concat() ignores NULL arguments, unlike the || operator, which returns NULL. It does not insert the text null.` },
+
+    { id: 'null-types-06', type: 'mcq', tag: 'syntax',
+      q: `Which standard function replaces a NULL score with 0 in PostgreSQL?`,
+      options: [`NVL(score, 0)`, `COALESCE(score, 0)`, `IFNULL(score, 0)`, `NULLIF(score, 0)`],
+      answer: 1,
+      why: `COALESCE returns its first non-NULL argument and works in PostgreSQL. NVL is Oracle, IFNULL is MySQL, and NULLIF does the reverse: it turns 0 into NULL.` },
+
+    { id: 'null-types-07', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT COALESCE(NULLIF('', ''), 'n/a');`,
+      options: [`NULL`, `an empty string`, `n/a`, `an error`],
+      answer: 2,
+      why: `NULLIF('', '') returns NULL because its arguments are equal, so COALESCE falls through to 'n/a'. An empty string is not NULL, so COALESCE alone would keep it.` },
+
+    { id: 'null-types-08', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT NULL IS DISTINCT FROM NULL AS r;`,
+      options: [`NULL`, `true`, `Error: NULL has no type`, `false`],
+      answer: 3,
+      why: `IS DISTINCT FROM treats two NULLs as equal, so they are not distinct and the result is false. Plain NULL <> NULL would return NULL.` },
+
+    { id: 'null-types-09', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT count(*)
+FROM generate_series(1, 3) AS n
+WHERE n NOT IN (1, NULL);`,
+      options: [`0`, `2`, `3`, `Error: NULL not allowed in IN`],
+      answer: 0,
+      why: `n NOT IN (1, NULL) means n <> 1 AND n <> NULL. The second test is never true, so for n = 2 and 3 the result is NULL and no rows pass. The tempting answer is 2.` },
+
+    { id: 'null-types-10', type: 'mcq', tag: 'postgres',
+      q: `What do these row-value tests return?`,
+      code: `SELECT (1, NULL) IS NULL AS a,
+       (1, NULL) IS NOT NULL AS b;`,
+      options: [`a = true, b = false`, `a = false, b = true`, `a = false, b = false`, `a = true, b = true`],
+      answer: 2,
+      why: `For a row, IS NULL is true only if every field is NULL, and IS NOT NULL only if every field is non-NULL. A mixed row fails both, so they are not inverses.` },
+
+    { id: 'null-types-11', type: 'mcq', tag: 'output',
+      q: `What are a and b?`,
+      code: `SELECT count(*) AS a, count(x) AS b
+FROM (VALUES (1), (NULL), (3)) AS t(x);`,
+      options: [`a = 3, b = 3`, `a = 2, b = 2`, `a = 3, b = 2`, `a = 2, b = 3`],
+      answer: 2,
+      why: `count(*) counts rows, including the NULL one. count(x) counts only non-NULL values of x.` },
+
+    { id: 'null-types-12', type: 'mcq', tag: 'output',
+      q: `What is avg(x)?`,
+      code: `SELECT avg(x)
+FROM (VALUES (10), (NULL), (30)) AS t(x);`,
+      options: [`13.33`, `10`, `NULL`, `20`],
+      answer: 3,
+      why: `avg ignores NULLs: (10 + 30) / 2 = 20. Dividing by all 3 rows would give 13.33, which is the misconception.` },
+
+    { id: 'null-types-13', type: 'mcq', tag: 'output',
+      q: `What are a and b?`,
+      code: `SELECT 1 IN (1, NULL) AS a,
+       2 IN (1, NULL) AS b;`,
+      options: [`a = true, b = NULL`, `a = true, b = false`, `a = NULL, b = NULL`, `a = true, b = true`],
+      answer: 0,
+      why: `A match makes IN true even with a NULL in the list. With no match, 2 = 1 is false but 2 = NULL is unknown, so the whole test is NULL, not false.` },
+
+    { id: 'null-types-14', type: 'mcq', tag: 'postgres',
+      q: `By default in PostgreSQL, how many NULLs can a UNIQUE column hold?`,
+      options: [`Only one`, `Any number`, `None; UNIQUE implies NOT NULL`, `At most two`],
+      answer: 1,
+      why: `NULLs are never equal to each other, so they never violate UNIQUE. PostgreSQL 15+ can change this with NULLS NOT DISTINCT. NOT NULL is implied only by PRIMARY KEY.` },
+
+    { id: 'null-types-15', type: 'mcq', tag: 'output',
+      q: `How many rows does this return?`,
+      code: `SELECT x
+FROM (VALUES (1), (2), (NULL)) AS t(x)
+WHERE NOT (x = 1);`,
+      options: [`3`, `2`, `1`, `0`],
+      answer: 2,
+      why: `For the NULL row, x = 1 is NULL and NOT NULL is still NULL, so it is filtered out. Only 2 passes. Answering 2 assumes NULL counts as "not 1".` },
+
+    { id: 'null-types-16', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT 7 / 2 AS r;`,
+      options: [`3.5`, `4`, `3.0`, `3`],
+      answer: 3,
+      why: `Both operands are integers, so PostgreSQL does integer division and truncates to 3. Use 7 / 2.0 or 7::numeric / 2 to get 3.5.` },
+
+    { id: 'null-types-17', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT 0.1::float8 + 0.2::float8 = 0.3 AS r;`,
+      options: [`false`, `true`, `NULL`, `Error: float8 = numeric`],
+      answer: 0,
+      why: `float8 stores binary approximations, so 0.1 + 0.2 is 0.30000000000000004, not 0.3. The same sum in numeric is exact and gives true.` },
+
+    { id: 'null-types-18', type: 'mcq', tag: 'postgres',
+      q: `Which cast form is standard SQL rather than PostgreSQL-specific?`,
+      options: [`price::numeric`, `CAST(price AS numeric)`, `price TO numeric`, `(numeric) price`],
+      answer: 1,
+      why: `CAST(expr AS type) is standard and portable. expr::type is a PostgreSQL shorthand with the same effect. The other two forms are not valid PostgreSQL.` },
+
+    { id: 'null-types-19', type: 'mcq', tag: 'debug',
+      q: `What happens in PostgreSQL?`,
+      code: `SELECT '12abc'::int;`,
+      noRun: true,
+      options: [`Returns 12, ignoring the trailing text`, `Returns NULL`, `Error: invalid input syntax for type integer`, `Returns 0`],
+      answer: 2,
+      why: `PostgreSQL is strict: a failed text-to-integer cast raises an error instead of truncating or returning NULL, as some other databases do.` },
+
+    { id: 'null-types-20', type: 'mcq', tag: 'postgres',
+      q: `What does a timestamptz value actually store in PostgreSQL?`,
+      options: [`Local clock time plus the time zone name`, `Local clock time plus the numeric UTC offset`, `Local clock time with no zone information`, `A UTC instant, shown in the session time zone`],
+      answer: 3,
+      why: `timestamptz stores one absolute instant (internally UTC) and renders it in the session TimeZone. No zone name or offset is kept. timestamp, without tz, is the plain local-time type.` },
+
+    { id: 'null-types-21', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT TIMESTAMP '2025-01-31 00:00'
+       + INTERVAL '1 month' AS r;`,
+      options: [`2025-02-28 00:00:00`, `2025-03-03 00:00:00`, `2025-03-01 00:00:00`, `Error: day out of range`],
+      answer: 0,
+      why: `Adding months keeps the day when possible and otherwise clamps to the end of the month, so Jan 31 plus 1 month is Feb 28. It does not overflow into March.` },
+
+    { id: 'null-types-22', type: 'mcq', tag: 'postgres',
+      q: `What does this return?`,
+      code: `SELECT 'off'::boolean AS r;`,
+      options: [`true`, `false`, `NULL`, `Error: invalid boolean`],
+      answer: 1,
+      why: `PostgreSQL accepts 'off', 'no', 'f', 'false', 'n' and '0' as false, and the matching spellings as true. It does not treat any non-empty string as true.` },
+
+    { id: 'null-types-r01', type: 'recall', tag: 'theory',
+      front: `Which AND / OR combinations with NULL do not give NULL?`,
+      back: `<code>NULL AND false</code> = false and <code>NULL OR true</code> = true. Every other combination with NULL gives NULL.` },
+
+    { id: 'null-types-r02', type: 'recall', tag: 'syntax',
+      front: `How do you compare a and b so that two NULLs count as equal?`,
+      back: `<code>a IS NOT DISTINCT FROM b</code>. Plain <code>a = b</code> gives NULL when either side is NULL. <code>IS DISTINCT FROM</code> is the negation.` },
+
+    { id: 'null-types-r03', type: 'recall', tag: 'syntax',
+      front: `What does <code>COALESCE(a, b, c)</code> return?`,
+      back: `The first argument that is not NULL, or NULL if all are NULL. Arguments after the first non-NULL one are not evaluated.` },
+
+    { id: 'null-types-r04', type: 'recall', tag: 'theory',
+      front: `How do you make <code>avg(x)</code> count NULLs as 0?`,
+      back: `<code>avg(COALESCE(x, 0))</code>. Plain <code>avg(x)</code> skips NULLs and divides only by the number of non-NULL values.` },
+
+    { id: 'null-types-r05', type: 'recall', tag: 'interview',
+      front: `For money amounts, why use numeric instead of float?`,
+      back: `<code>numeric(p,s)</code> stores exact decimals; float types are binary approximations (0.1 + 0.2 is not 0.3).` }
+  ]
+});
+DECKS.push({
+  id: 'aggregation',
+  name: 'Aggregation & GROUP BY',
+  emoji: '📊',
+  blurb: 'COUNT variants, NULLs, GROUP BY rules, HAVING, FILTER.',
+  cards: [
+    { id: 'aggregation-01', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `WITH t(x) AS (VALUES (1),(NULL),(1))
+SELECT count(1) FROM t;`,
+      options: [`2`, `3`, `1`, `NULL`],
+      answer: 1,
+      why: `count(1) counts a non-NULL constant, so every row counts, including the one whose x is NULL. It behaves like count(*). Only count(x) would skip the NULL and return 2.` },
+    { id: 'aggregation-02', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `WITH t(x) AS (VALUES (1),(NULL),(1),(2))
+SELECT count(DISTINCT x) FROM t;`,
+      options: [`2`, `3`, `4`, `1`],
+      answer: 0,
+      why: `DISTINCT removes the duplicate 1, and count ignores NULL, leaving {1, 2}. 3 is tempting if you treat NULL as one more distinct value, but aggregates skip NULLs.` },
+    { id: 'aggregation-03', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `WITH t(x) AS (VALUES (10),(10),(40))
+SELECT round(avg(DISTINCT x)) FROM t;`,
+      options: [`10`, `20`, `40`, `25`],
+      answer: 3,
+      why: `DISTINCT is applied before avg, so the inputs are 10 and 40 and the average is 25. Plain avg(x) would give 20, the tempting answer.` },
+    { id: 'aggregation-04', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, what type does avg() return when its input is an integer column?`,
+      options: [`numeric`, `integer`, `double precision`, `bigint`],
+      answer: 0,
+      why: `For smallint, integer and bigint inputs avg() returns numeric, so the fraction is kept. integer is the tempting answer, but PostgreSQL does not truncate averages of integers.` },
+    { id: 'aggregation-05', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT sum(x) / count(*)
+FROM (VALUES (1),(2)) t(x);`,
+      options: [`1.5`, `2`, `NULL`, `1`],
+      answer: 3,
+      why: `sum and count both return bigint, so / is integer division: 3 / 2 truncates to 1. 1.5 is tempting; use avg(x) or cast one side to numeric to keep the fraction.` },
+    { id: 'aggregation-06', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT count(*), sum(x)
+FROM (VALUES (1),(2)) t(x)
+WHERE x > 5;`,
+      options: [`count 0, sum 0`, `count NULL, sum NULL`, `count 0, sum NULL`, `no rows at all`],
+      answer: 2,
+      why: `Without GROUP BY an aggregate query always returns one row. count gives 0 on empty input, but sum, avg, min and max give NULL. "count 0, sum 0" is tempting but wrong.` },
+    { id: 'aggregation-07', type: 'mcq', tag: 'output',
+      q: `How many rows does this query return?`,
+      code: `SELECT count(*)
+FROM (VALUES (1),(2)) t(x)
+WHERE x > 5
+GROUP BY x;`,
+      options: [`One row: 0`, `One row: NULL`, `An error`, `No rows`],
+      answer: 3,
+      why: `GROUP BY returns one row per group, and no input rows means no groups. "One row: 0" is tempting, but that only happens when there is no GROUP BY.` },
+    { id: 'aggregation-08', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `WITH t(x) AS (VALUES (3),(NULL),(7))
+SELECT max(x) FROM t;`,
+      options: [`NULL`, `7`, `3`, `10`],
+      answer: 1,
+      why: `max ignores NULLs and returns 7. NULL is tempting because ORDER BY ... DESC puts NULLs first, but aggregates skip NULL inputs entirely.` },
+    { id: 'aggregation-09', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, which expression makes sum(x) return 0 instead of NULL when no rows match the WHERE?`,
+      options: [`COALESCE(sum(x), 0)`, `sum(COALESCE(x, 0))`, `NULLIF(sum(x), 0)`, `IFNULL(sum(x), 0)`],
+      answer: 0,
+      why: `COALESCE around the aggregate replaces the NULL that sum returns for empty input. sum(COALESCE(x, 0)) is tempting but still sums zero rows, which gives NULL. IFNULL does not exist in PostgreSQL.` },
+    { id: 'aggregation-10', type: 'mcq', tag: 'debug', noRun: true,
+      q: `Why does this query fail in PostgreSQL?`,
+      code: `SELECT department_id, last_name,
+       count(*)
+FROM employees
+GROUP BY department_id;`,
+      options: [`count(*) needs a column argument with GROUP BY`, `last_name is neither grouped nor aggregated`, `GROUP BY must list columns in SELECT order`, `department_id contains NULLs`],
+      answer: 1,
+      why: `Every selected column must be in GROUP BY or inside an aggregate, and last_name is neither. Several employees in a department have different last names, so no single value exists.` },
+    { id: 'aggregation-11', type: 'mcq', tag: 'postgres',
+      q: `Does this query run in PostgreSQL?`,
+      code: `SELECT employee_id, last_name,
+       count(*)
+FROM employees
+GROUP BY employee_id;`,
+      options: [`No, last_name must be in GROUP BY`, `Yes, last_name depends on the primary key`, `Yes, but only if last_name is NOT NULL`, `No, count(*) can't mix with columns`],
+      answer: 1,
+      why: `employee_id is the primary key, so every other column of employees is functionally dependent on it and may be selected ungrouped. "last_name must be in GROUP BY" is the general rule, but this is the exception.` },
+    { id: 'aggregation-12', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT x / 3 AS bucket, count(*)
+FROM generate_series(1, 6) x
+GROUP BY x / 3
+ORDER BY bucket;`,
+      options: [`(1, 3), (2, 3)`, `(0, 3), (1, 3)`, `(0, 2), (1, 2), (2, 2)`, `(0, 2), (1, 3), (2, 1)`],
+      answer: 3,
+      why: `Integer division truncates: 1 and 2 give bucket 0; 3, 4 and 5 give 1; 6 gives 2. The expression is the grouping key, so equal quotients land in one group.` },
+    { id: 'aggregation-13', type: 'mcq', tag: 'syntax',
+      q: `In PostgreSQL, what does GROUP BY 1 do?`,
+      options: [`It groups by the first SELECT-list item`, `It groups by the table's first column`, `It puts all rows into one group`, `It is an error: 1 is a constant`],
+      answer: 0,
+      why: `An integer in GROUP BY (like in ORDER BY) is a position in the SELECT list. "The table's first column" is tempting, but the position refers to the select list, not the table definition.` },
+    { id: 'aggregation-14', type: 'mcq', tag: 'debug', noRun: true,
+      q: `Why does this query fail?`,
+      code: `SELECT department_id
+FROM employees
+WHERE count(*) > 3
+GROUP BY department_id;`,
+      options: [`count(*) must be written count(1) in WHERE`, `WHERE can't be combined with GROUP BY`, `WHERE runs before grouping, so no count exists yet`, `department_id must be inside an aggregate`],
+      answer: 2,
+      why: `WHERE filters individual rows before groups are formed, so aggregates are not allowed there. Use HAVING count(*) > 3. Combining WHERE with GROUP BY is perfectly legal.` },
+    { id: 'aggregation-15', type: 'mcq', tag: 'interview',
+      q: `A filter on a grouping column (department_id = 1) works in WHERE or HAVING. Which is the better habit?`,
+      options: [`HAVING, because the query uses GROUP BY`, `HAVING, because WHERE can't see grouped columns`, `Neither; it belongs in the ON clause`, `WHERE, since it discards rows before grouping`],
+      answer: 3,
+      why: `WHERE states the intent: drop rows before grouping, leaving HAVING for aggregate conditions. PostgreSQL's planner often pushes such a HAVING down anyway, but WHERE is clearer and portable.` },
+    { id: 'aggregation-16', type: 'mcq', tag: 'debug', noRun: true,
+      q: `Why does this query fail in PostgreSQL?`,
+      code: `SELECT department_id, count(*) AS n
+FROM employees
+GROUP BY department_id
+HAVING n > 3;`,
+      options: [`HAVING can't use SELECT aliases; repeat count(*)`, `The alias n must be quoted`, `HAVING requires an ORDER BY`, `count(*) AS n is illegal with GROUP BY`],
+      answer: 0,
+      why: `HAVING is evaluated before the SELECT list, so the alias n does not exist yet: write HAVING count(*) > 3. GROUP BY and ORDER BY may use output aliases, which is why this feels like it should work.` },
+    { id: 'aggregation-17', type: 'mcq', tag: 'interview',
+      q: `How do SELECT DISTINCT a FROM t and SELECT a FROM t GROUP BY a compare?`,
+      options: [`GROUP BY drops the NULL group; DISTINCT keeps it`, `GROUP BY sorts its output; DISTINCT never does`, `DISTINCT is always faster than GROUP BY`, `Same rows; GROUP BY also allows aggregates`],
+      answer: 3,
+      why: `Both collapse duplicates and treat all NULLs as one value; GROUP BY additionally lets you compute aggregates per group. GROUP BY does not drop NULLs, and neither guarantees sorted output.` },
+    { id: 'aggregation-18', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT x, count(*)
+FROM (VALUES (1),(NULL),(NULL)) t(x)
+GROUP BY x
+ORDER BY x;`,
+      options: [`Two rows: (1, 1) and (NULL, 2)`, `One row: (1, 1)`, `Three rows: one per input row`, `Two rows: (1, 1) and (NULL, 1)`],
+      answer: 0,
+      why: `GROUP BY puts all NULLs into a single group, so the NULL group has count 2. Three rows is tempting because NULL = NULL is not true in comparisons, but grouping treats NULLs as equal.` },
+    { id: 'aggregation-19', type: 'mcq', tag: 'syntax',
+      q: `Which PostgreSQL syntax counts only the rows where x &gt; 1 inside a larger aggregate query?`,
+      options: [`count(*) WHERE x &gt; 1`, `count(*) FILTER x &gt; 1`, `count(*) FILTER (WHERE x &gt; 1)`, `count(*) HAVING (x &gt; 1)`],
+      answer: 2,
+      why: `The aggregate FILTER clause takes a parenthesized WHERE condition and applies to just that aggregate. HAVING filters whole groups, not the rows going into one aggregate.` },
+    { id: 'aggregation-20', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT sum(CASE WHEN x > 5 THEN 1 END)
+FROM generate_series(1, 3) x;`,
+      options: [`1`, `0`, `An error`, `NULL`],
+      answer: 3,
+      why: `With no ELSE, unmatched rows give NULL, and the sum of only NULLs is NULL. 0 is tempting; add ELSE 0, wrap in COALESCE, or use count(*) FILTER, which does return 0.` },
+    { id: 'aggregation-21', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `SELECT count(CASE WHEN x > 1
+                THEN 1 ELSE 0 END)
+FROM generate_series(1, 4) x;`,
+      options: [`3`, `4`, `1`, `0`],
+      answer: 1,
+      why: `count counts non-NULL values, and ELSE 0 makes every row non-NULL, so all 4 rows are counted. 3 is what was intended; use sum(...) with ELSE 0, or drop the ELSE.` },
+    { id: 'aggregation-22', type: 'mcq', tag: 'interview',
+      q: `x is an integer column. Which expression gives x as a fractional percent of the column total?`,
+      options: [`x / sum(x) OVER () * 100`, `x * 100 / sum(x) OVER ()`, `100.0 * x / sum(x) OVER ()`, `100 * (x / sum(x) OVER ())`],
+      answer: 2,
+      why: `100.0 forces numeric division. The others use integer division: x / sum(x) is 0 for any row but the whole total, and x * 100 / sum(x) truncates the fraction (the tempting one).` },
+    { id: 'aggregation-23', type: 'mcq', tag: 'postgres',
+      q: `What does this query return?`,
+      code: `SELECT count(*)
+FROM generate_series(1, 3) x
+HAVING count(*) > 5;`,
+      options: [`One row: 3`, `No rows`, `One row: 0`, `An error`],
+      answer: 1,
+      why: `Without GROUP BY, HAVING filters the single whole-table group. count is 3, which fails > 5, so no rows come back. An error is tempting, but HAVING without GROUP BY is legal.` },
+    { id: 'aggregation-24', type: 'mcq', tag: 'order',
+      q: `Which clause is evaluated right after GROUP BY?`,
+      options: [`HAVING`, `SELECT`, `ORDER BY`, `WHERE`],
+      answer: 0,
+      why: `The order is FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY. SELECT is tempting because it holds the aggregates, but HAVING filters the groups first, which is why it cannot use SELECT aliases.` },
+
+    { id: 'aggregation-r01', type: 'recall', tag: 'theory',
+      front: `What does count(col) ignore that count(*) does not?`,
+      back: `NULLs. <code>count(*)</code> counts every row; <code>count(col)</code> counts only rows where col is not NULL; <code>count(DISTINCT col)</code> counts distinct non-NULL values.` },
+    { id: 'aggregation-r02', type: 'recall', tag: 'theory',
+      front: `Why can't you use an aggregate in WHERE, and what do you use instead?`,
+      back: `WHERE runs before grouping, so no aggregate values exist yet. Filter groups with <code>HAVING count(*) &gt; 3</code> instead.` },
+    { id: 'aggregation-r03', type: 'recall', tag: 'syntax',
+      front: `Write a conditional count of rows with status = 'paid' in one query (two ways).`,
+      back: `<code>count(*) FILTER (WHERE status = 'paid')</code><br><code>sum(CASE WHEN status = 'paid' THEN 1 ELSE 0 END)</code>` },
+    { id: 'aggregation-r04', type: 'recall', tag: 'postgres',
+      front: `What does PostgreSQL's functional dependency rule let you do in GROUP BY?`,
+      back: `Group by a table's primary key and select that table's other columns without listing them in GROUP BY or aggregating them.` },
+    { id: 'aggregation-r05', type: 'recall', tag: 'theory',
+      front: `What do sum, avg, min and max return on zero rows or all-NULL input?`,
+      back: `NULL. Only <code>count</code> returns 0. Wrap with <code>COALESCE(sum(x), 0)</code> if you need a zero.` }
+  ]
+});
+DECKS.push({
+  id: 'joins',
+  name: 'Joins',
+  emoji: '🤝',
+  blurb: 'INNER, LEFT, anti-joins, fan-out, ON vs WHERE.',
+  cards: [
+    { id: 'joins-01', type: 'mcq', tag: 'syntax',
+      q: `Which join returns unmatched rows from both tables?`,
+      options: [`FULL OUTER JOIN`, `LEFT JOIN`, `CROSS JOIN`, `NATURAL JOIN`],
+      answer: 0,
+      why: `FULL OUTER JOIN keeps unmatched rows from both sides, padding the other side with NULLs. LEFT JOIN is tempting but keeps unmatched rows from the left table only.` },
+    { id: 'joins-02', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `WITH a(id) AS (VALUES (1),(2),(3)),
+     b(id) AS (VALUES (2),(3),(4))
+SELECT count(*)
+FROM a FULL JOIN b USING (id);`,
+      options: [`3`, `4`, `5`, `6`],
+      answer: 1,
+      why: `Ids 2 and 3 match once each, plus unmatched 1 from a and 4 from b: 4 rows. 3 is what a LEFT JOIN would give; 5 or 6 would over-count by repeating matched rows.` },
+    { id: 'joins-03', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `SELECT count(*)
+FROM generate_series(1, 8) a
+CROSS JOIN generate_series(1, 3) b;`,
+      options: [`11`, `16`, `24`, `32`],
+      answer: 2,
+      why: `CROSS JOIN pairs every left row with every right row: 8 x 3 = 24. 11 is the tempting sum of the two row counts.` },
+    { id: 'joins-04', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `WITH c(id) AS (VALUES (1),(2)),
+     o(cid) AS (VALUES (1),(1),(1))
+SELECT count(*)
+FROM c LEFT JOIN o ON o.cid = c.id;`,
+      options: [`6`, `2`, `3`, `4`],
+      answer: 3,
+      why: `Customer 1 matches 3 orders (3 rows), and customer 2 matches none but is kept once with NULLs: 4 rows. 3 is the tempting INNER JOIN count.` },
+    { id: 'joins-05', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `WITH a(k) AS (VALUES (1),(1)),
+     b(k) AS (VALUES (1),(1),(1))
+SELECT count(*)
+FROM a JOIN b USING (k);`,
+      options: [`2`, `6`, `5`, `3`],
+      answer: 1,
+      why: `A many-to-many match multiplies: each of the 2 left rows matches all 3 right rows, so 2 x 3 = 6. 5 is tempting if you add instead of multiply.` },
+    { id: 'joins-06', type: 'mcq', tag: 'interview',
+      q: `What does this query return?`,
+      code: `WITH o(id, total) AS (VALUES (1, 100)),
+     i(oid) AS (VALUES (1),(1),(1))
+SELECT sum(o.total)
+FROM o JOIN i ON i.oid = o.id;`,
+      options: [`300`, `100`, `3`, `103`],
+      answer: 0,
+      why: `The order's 100 is repeated for each of its 3 item rows, so the sum is 300 (fan-out). 100 is the tempting answer; aggregate before joining to avoid the inflation.` },
+    { id: 'joins-07', type: 'mcq', tag: 'output',
+      q: `How many columns does this query return?`,
+      code: `WITH a(id, x) AS (VALUES (1, 'p')),
+     b(id, y) AS (VALUES (1, 'q'))
+SELECT *
+FROM a JOIN b USING (id);`,
+      options: [`2`, `4`, `3`, `1`],
+      answer: 2,
+      why: `USING merges the join column into a single id, so the output is id, x, y. 4 is what ON a.id = b.id would give, because it returns id from both tables.` },
+    { id: 'joins-08', type: 'mcq', tag: 'theory',
+      q: `When must you write ON instead of USING?`,
+      options: [`The join columns have different names`, `The join is a LEFT or FULL join`, `More than one column is compared`, `The key column can contain NULLs`],
+      answer: 0,
+      why: `USING (col) needs the same column name on both sides; ON handles different names and non-equality conditions. USING works with several columns and any outer join, which is the tempting misconception.` },
+    { id: 'joins-09', type: 'mcq', tag: 'syntax', noRun: true,
+      q: `Which WHERE completes this anti-join to find customers with no orders?`,
+      code: `SELECT c.id
+FROM customers c
+LEFT JOIN orders o ON o.cid = c.id
+WHERE ...;`,
+      options: [`o.cid = NULL`, `c.id IS NULL`, `o.cid &lt;&gt; c.id`, `o.cid IS NULL`],
+      answer: 3,
+      why: `Unmatched customers get NULL in every column of o, so test a right-table column with IS NULL. c.id IS NULL is tempting, but the left key is never NULL here. = NULL is never true.` },
+    { id: 'joins-10', type: 'mcq', tag: 'output',
+      q: `What does this query return?`,
+      code: `WITH a(id) AS (VALUES (1),(2)),
+     b(id) AS (VALUES (1),(NULL))
+SELECT count(*) FROM a
+WHERE id NOT IN (SELECT id FROM b);`,
+      options: [`2`, `0`, `1`, `An error`],
+      answer: 1,
+      why: `A NULL in the NOT IN list makes the test UNKNOWN for every non-matching value, so no row passes: the count is 0. 1 is tempting because only id 2 is absent from b.` },
+    { id: 'joins-11', type: 'mcq', tag: 'interview',
+      q: `Which anti-join form stays correct when the subquery column can contain NULLs?`,
+      options: [`NOT IN (SELECT ...)`, `&lt;&gt; ALL (SELECT ...)`, `NOT EXISTS (SELECT ...)`, `&lt;&gt; ANY (SELECT ...)`],
+      answer: 2,
+      why: `NOT EXISTS tests whether a matching row exists, so a NULL key simply fails to match. NOT IN is the popular form, but it and &lt;&gt; ALL return nothing when the list contains a NULL.` },
+    { id: 'joins-12', type: 'mcq', tag: 'output',
+      q: `What does this semi-join return?`,
+      code: `WITH c(id) AS (VALUES (1),(2)),
+     o(cid) AS (VALUES (1),(1),(1))
+SELECT count(*) FROM c
+WHERE EXISTS (SELECT 1 FROM o
+              WHERE o.cid = c.id);`,
+      options: [`2`, `0`, `3`, `1`],
+      answer: 3,
+      why: `EXISTS only tests for a match, so customer 1 counts once however many orders it has, and customer 2 has none. 3 is tempting; a plain JOIN would fan out to 3 rows.` },
+    { id: 'joins-13', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `WITH c(id) AS (VALUES (1),(2)),
+     o(cid, s) AS (VALUES (1,'paid'),
+                          (2,'void'))
+SELECT count(*)
+FROM c LEFT JOIN o
+  ON o.cid = c.id AND o.s = 'paid';`,
+      options: [`2`, `1`, `0`, `3`],
+      answer: 0,
+      why: `A failing ON condition only blanks the right columns; every left row survives a LEFT JOIN. Customer 2 is kept with NULLs, so 2 rows. 1 is what the same test in WHERE would give.` },
+    { id: 'joins-14', type: 'mcq', tag: 'debug', noRun: true,
+      q: `Customers with no paid orders vanish from this result. What keeps them?`,
+      code: `SELECT c.name, o.total
+FROM customers c
+LEFT JOIN orders o ON o.cid = c.id
+WHERE o.status = 'paid';`,
+      options: [`Move o.status = 'paid' into the ON clause`, `Use RIGHT JOIN instead`, `Change WHERE to HAVING`, `Add DISTINCT to the SELECT`],
+      answer: 0,
+      why: `WHERE o.status = 'paid' rejects the NULL-extended rows, turning the LEFT JOIN into an INNER JOIN. In ON, the test only limits which orders match. HAVING doesn't help: there is no grouping.` },
+    { id: 'joins-15', type: 'mcq', tag: 'theory',
+      q: `a RIGHT JOIN b is equivalent to which join?`,
+      options: [`a LEFT JOIN b`, `a INNER JOIN b`, `b LEFT JOIN a`, `b RIGHT JOIN a`],
+      answer: 2,
+      why: `RIGHT JOIN keeps every row of b, so swapping the tables gives b LEFT JOIN a. a LEFT JOIN b is tempting but keeps every row of a instead.` },
+    { id: 'joins-16', type: 'mcq', tag: 'interview',
+      q: `In a self-join of t as a and b, which condition returns each unordered pair of rows exactly once?`,
+      options: [`a.id &lt;&gt; b.id`, `a.id = b.id`, `a.id &lt;= b.id`, `a.id &lt; b.id`],
+      answer: 3,
+      why: `a.id &lt; b.id keeps (1,2) but not (2,1), and never pairs a row with itself. &lt;&gt; returns both orders (the tempting choice), and &lt;= adds self-pairs.` },
+    { id: 'joins-17', type: 'mcq', tag: 'debug',
+      q: `Which employee is missing from this result?`,
+      code: `SELECT e.last_name, m.last_name
+FROM employees e
+JOIN employees m
+  ON m.employee_id = e.manager_id;`,
+      options: [`Employees who manage others`, `The CEO, whose manager_id is NULL`, `Employees with duplicate last names`, `Nobody; self-joins keep every row`],
+      answer: 1,
+      why: `The CEO's manager_id is NULL, which matches no employee_id, so the INNER JOIN drops that row. Use LEFT JOIN to keep it. A self-join is an ordinary join, so "nobody" is wrong.` },
+    { id: 'joins-18', type: 'mcq', tag: 'output',
+      q: `How many rows does this query count?`,
+      code: `WITH a(k) AS (VALUES (1),(NULL)),
+     b(k) AS (VALUES (1),(NULL))
+SELECT count(*)
+FROM a JOIN b USING (k);`,
+      options: [`2`, `1`, `4`, `0`],
+      answer: 1,
+      why: `NULL = NULL is UNKNOWN, so NULL keys never join; only 1 matches 1. 2 is tempting if you assume NULLs match each other.` },
+    { id: 'joins-19', type: 'mcq', tag: 'postgres',
+      q: `Which join condition matches NULL keys to NULL keys in PostgreSQL?`,
+      options: [`a.k &lt;=&gt; b.k`, `a.k == b.k`, `a.k = b.k OR a.k IS NULL`, `a.k IS NOT DISTINCT FROM b.k`],
+      answer: 3,
+      why: `IS NOT DISTINCT FROM treats two NULLs as equal. &lt;=&gt; is MySQL syntax, and == is invalid. The OR version pairs every row having NULL a.k with every b row.` },
+    { id: 'joins-20', type: 'mcq', tag: 'interview',
+      q: `For INNER JOINs only, does the written join order change the result rows?`,
+      options: [`No, the planner may reorder them freely`, `Yes, the first table filters the later ones`, `Yes, the smallest table must come first`, `No, but only when USING is used`],
+      answer: 0,
+      why: `INNER JOIN is commutative and associative, so the planner reorders joins for speed without changing rows. Order does matter once outer joins are mixed in.` },
+    { id: 'joins-21', type: 'mcq', tag: 'debug', noRun: true,
+      q: `What happens to rows of a that have no match in b?`,
+      code: `SELECT a.id, c.v
+FROM a
+LEFT JOIN b ON b.aid = a.id
+JOIN c ON c.bid = b.id;`,
+      options: [`Kept with NULL in c.v`, `Kept, since LEFT JOIN came first`, `Dropped by the later INNER JOIN`, `An error: join order is invalid`],
+      answer: 2,
+      why: `For those rows b.id is NULL, and NULL = c.bid is never true, so the later INNER JOIN removes them. Make it LEFT JOIN c too. "Kept" is tempting because the LEFT JOIN came first.` },
+    { id: 'joins-22', type: 'mcq', tag: 'postgres', noRun: true,
+      q: `Why does this query fail in PostgreSQL?`,
+      code: `SELECT employees.last_name
+FROM employees e;`,
+      options: [`last_name is ambiguous`, `Aliases require the AS keyword`, `Table names can't qualify columns`, `The alias e hides the table name here`],
+      answer: 3,
+      why: `Once you write employees e, the name employees is no longer visible in that query: use e.last_name. AS is optional, and qualifying columns is fine, which is why the "can't qualify" option is wrong.` },
+    { id: 'joins-23', type: 'mcq', tag: 'output',
+      q: `What count does customer 2 get?`,
+      code: `WITH c(id) AS (VALUES (1),(2)),
+     o(cid) AS (VALUES (1),(1))
+SELECT c.id, count(o.cid) AS n
+FROM c LEFT JOIN o ON o.cid = c.id
+GROUP BY c.id ORDER BY c.id;`,
+      options: [`1`, `NULL`, `0`, `The row is missing`],
+      answer: 2,
+      why: `Customer 2 is kept with o.cid NULL, and count(o.cid) skips NULLs, so n is 0. count(*) would give 1, the tempting answer, because it counts the NULL-extended row.` },
+    { id: 'joins-24', type: 'mcq', tag: 'interview',
+      q: `What is the main danger of NATURAL JOIN?`,
+      options: [`It always produces a CROSS JOIN`, `It only supports INNER joins`, `It was removed in PostgreSQL 18`, `It matches on every same-named column`],
+      answer: 3,
+      why: `NATURAL JOIN matches all same-named columns, so adding a column later can silently change the results. It does support LEFT, RIGHT and FULL, and it still exists in PostgreSQL 18.` },
+
+    { id: 'joins-r01', type: 'recall', tag: 'theory',
+      front: `How do you write an anti-join (rows of A with no match in B)?`,
+      back: `<code>LEFT JOIN b ... WHERE b.id IS NULL</code> or <code>WHERE NOT EXISTS (...)</code>. Avoid <code>NOT IN</code> if B can have NULLs.` },
+    { id: 'joins-r02', type: 'recall', tag: 'theory',
+      front: `Why does filtering the right table in WHERE turn a LEFT JOIN into an INNER JOIN?`,
+      back: `Unmatched rows have NULL in right-table columns, and <code>WHERE b.col = 'x'</code> rejects NULL. Put the condition in <code>ON</code> to keep the unmatched left rows.` },
+    { id: 'joins-r03', type: 'recall', tag: 'syntax',
+      front: `How does JOIN ... USING (id) differ from ON a.id = b.id in SELECT *?`,
+      back: `USING returns the join column once (merged). ON returns both a.id and b.id as separate columns.` },
+    { id: 'joins-r04', type: 'recall', tag: 'interview',
+      front: `What is join fan-out, and how does it break aggregates?`,
+      back: `A one-to-many (or many-to-many) join repeats left rows, so <code>sum</code> and <code>count</code> over left columns inflate. Aggregate before joining, or count distinct keys.` },
+    { id: 'joins-r05', type: 'recall', tag: 'theory',
+      front: `What is a semi-join and why use EXISTS for it?`,
+      back: `It keeps rows of A that have at least one match in B, without repeating them. <code>WHERE EXISTS (SELECT 1 FROM b WHERE b.a_id = a.id)</code> avoids the fan-out a plain JOIN causes.` }
+  ]
+});
+DECKS.push({
+  id: 'subqueries',
+  name: 'Subqueries & CTEs',
+  emoji: '🥊',
+  blurb: 'Scalar, EXISTS, correlated, CTEs, recursion, LATERAL.',
+  cards: [
+    { id: 'subqueries-01', type: 'mcq', tag: 'theory',
+      q: `A scalar subquery used inside an expression may return how many columns and rows?`,
+      options: [`Any columns, any rows`, `One column, any rows`, `Any columns, one row`, `One column, at most one row`],
+      answer: 3,
+      why: `A scalar subquery needs exactly one column and at most one row; zero rows gives NULL. Extra rows are not truncated silently, they raise an error at run time.` },
+
+    { id: 'subqueries-02', type: 'mcq', tag: 'debug', noRun: true,
+      q: `Both rows in the subquery equal 5. What does this do in PostgreSQL?`,
+      code: `SELECT 1 WHERE 5 = (
+  SELECT x
+  FROM (VALUES (5),(5)) v(x));`,
+      options: [`Returns 1, since both rows equal 5`, `Error: more than one row returned by a subquery`, `Returns 1, using the first row`, `Returns no rows`],
+      answer: 1,
+      why: `A scalar subquery that yields two rows raises an error, whatever the values are. Equal values do not help; fix it with LIMIT 1, an aggregate, or IN / ANY.` },
+
+    { id: 'subqueries-03', type: 'mcq', tag: 'output',
+      q: `What does this return when the subquery finds no row?`,
+      code: `SELECT (SELECT x
+        FROM (VALUES (1)) v(x)
+        WHERE x > 5) AS r;`,
+      options: [`One row containing 0`, `No rows at all`, `An error: subquery returned no rows`, `One row containing NULL`],
+      answer: 3,
+      why: `An empty scalar subquery evaluates to NULL, and the outer SELECT still emits its one row. It is not an error and it does not remove the outer row.` },
+
+    { id: 'subqueries-04', type: 'mcq', tag: 'output',
+      q: `How many rows does this return?`,
+      code: `SELECT 'kept' AS r
+WHERE NOT EXISTS (SELECT 1
+  FROM (VALUES (2),(NULL)) v(x)
+  WHERE v.x = 1);`,
+      options: [`No rows`, `An error about the NULL`, `One row: kept`, `Two rows: kept and NULL`],
+      answer: 2,
+      why: `No row has x = 1 (2 = 1 is false, NULL = 1 is unknown), so the subquery is empty and NOT EXISTS is true. NOT IN over the same values would return no rows.` },
+
+    { id: 'subqueries-05', type: 'mcq', tag: 'theory',
+      q: `What makes a subquery correlated?`,
+      options: [`It is used with EXISTS or IN`, `It references a column of the outer query`, `It returns exactly one row`, `It appears in the SELECT list`],
+      answer: 1,
+      why: `A correlated subquery uses outer columns, so it is logically re-evaluated per outer row. Using EXISTS or IN is neither required nor sufficient.` },
+
+    { id: 'subqueries-06', type: 'mcq', tag: 'output',
+      q: `Which rows does this return?`,
+      code: `WITH t(g,v) AS (VALUES
+  ('a',1),('a',5),('b',2),('b',3))
+SELECT g, v FROM t o
+WHERE v = (SELECT max(v) FROM t
+           WHERE g = o.g)
+ORDER BY g;`,
+      options: [`(a,1) and (b,2)`, `(a,5) only`, `All four rows`, `(a,5) and (b,3)`],
+      answer: 3,
+      why: `The WHERE g = o.g ties the max to each outer row's group, giving the top row per group. Without the correlation the max would be 5 for everyone, and only (a,5) would remain.` },
+
+    { id: 'subqueries-07', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL 18, what happens when you run this?`,
+      code: `SELECT * FROM (SELECT 1 AS n);`,
+      options: [`Syntax error: subquery in FROM must have an alias`, `Runs and returns zero rows`, `Error: column "n" must be qualified`, `Runs; alias is optional since PostgreSQL 16`],
+      answer: 3,
+      why: `PostgreSQL 16 made the alias on a FROM subquery optional. Older versions and many other databases still raise "subquery in FROM must have an alias".` },
+
+    { id: 'subqueries-08', type: 'mcq', tag: 'debug', noRun: true,
+      q: `The second statement fails: relation "a" does not exist. Why?`,
+      code: `WITH a AS (SELECT 1 AS n)
+SELECT n FROM a;
+SELECT n + 1 FROM a;`,
+      options: [`A CTE exists only within the one statement it is attached to`, `CTEs are dropped after the first row is read`, `a needs WITH MATERIALIZED to persist`, `Column n goes out of scope after one SELECT`],
+      answer: 0,
+      why: `A CTE is visible only inside the single statement that defines it; it is not a temp table or view. Materialization controls evaluation, not lifetime.` },
+
+    { id: 'subqueries-09', type: 'mcq', tag: 'syntax',
+      q: `Which shape defines two CTEs for one query?`,
+      options: [`WITH a AS (...) WITH b AS (...) SELECT ...`, `WITH a AS (...); WITH b AS (...) SELECT ...`, `WITH a AS (...), b AS (...) SELECT ...`, `WITH a, b AS (...) SELECT ...`],
+      answer: 2,
+      why: `One WITH keyword, then comma-separated name AS (query) items, then the main statement. Repeating WITH or ending with a semicolon is a syntax error.` },
+
+    { id: 'subqueries-10', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `WITH a AS (SELECT 2 AS n),
+     b AS (SELECT n * 5 AS m FROM a)
+SELECT m + n FROM a, b;`,
+      options: [`7`, `10`, `12`, `Error: column n is ambiguous`],
+      answer: 2,
+      why: `b can read the earlier CTE a, so m = 10; the cross join of a and b gives 10 + 2 = 12. n exists only in a, so it is not ambiguous.` },
+
+    { id: 'subqueries-11', type: 'mcq', tag: 'postgres',
+      q: `Since PostgreSQL 12, how is a simple non-recursive, side-effect-free CTE used once treated by default?`,
+      options: [`Computed first and stored as a temporary result`, `Inlined into the outer query like a subquery`, `Executed once per row of the outer query`, `Written to a temp table on disk`],
+      answer: 1,
+      why: `PostgreSQL 12+ inlines such CTEs so the planner can optimize across them. Before 12, every CTE was an optimization fence that was always materialized.` },
+
+    { id: 'subqueries-12', type: 'mcq', tag: 'syntax',
+      q: `Which syntax forces PostgreSQL to compute a CTE once and store its result?`,
+      options: [`WITH x MATERIALIZED AS (...)`, `WITH x AS (MATERIALIZED ...)`, `WITH x AS MATERIALIZED (...)`, `WITH x AS (...) MATERIALIZED`],
+      answer: 2,
+      why: `The hint goes between AS and the parenthesis: AS MATERIALIZED (...) or AS NOT MATERIALIZED (...). It is PostgreSQL 12+ syntax.` },
+
+    { id: 'subqueries-13', type: 'mcq', tag: 'postgres',
+      q: `What does AS NOT MATERIALIZED allow for a CTE referenced twice?`,
+      options: [`Sharing one stored result between both uses`, `Inlining, so outer filters can reach into the CTE`, `Skipping indexes inside the CTE`, `Re-running it for each outer row`],
+      answer: 1,
+      why: `NOT MATERIALIZED lets the planner inline the CTE at each reference and push outer predicates into it. Sharing one stored result is what MATERIALIZED does.` },
+
+    { id: 'subqueries-14', type: 'mcq', tag: 'order',
+      q: `In what order does WITH RECURSIVE do its work?`,
+      options: [`Recursive member first, then the anchor`, `Both members run at once and are merged`, `Anchor once, then recursive member on the previous round's rows`, `Recursive member over all rows produced so far, each round`],
+      answer: 2,
+      why: `The anchor runs once; each later round feeds only the previous round's new rows to the recursive member. Re-reading all earlier rows each round is a common misconception.` },
+
+    { id: 'subqueries-15', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `WITH RECURSIVE n(i) AS (
+  SELECT 1
+  UNION ALL
+  SELECT i * 2 FROM n WHERE i < 10
+)
+SELECT sum(i) FROM n;`,
+      options: [`31`, `15`, `30`, `16`],
+      answer: 0,
+      why: `Rows are 1, 2, 4, 8, 16: 8 &lt; 10 still passes and yields 16; then 16 &lt; 10 fails and recursion ends. The sum is 31, not 15 (which stops one round too early).` },
+
+    { id: 'subqueries-16', type: 'mcq', tag: 'theory',
+      q: `Walking a graph that contains a cycle, what can plain UNION (not ALL) do in a recursive CTE?`,
+      options: [`Raise a cycle-detected error automatically`, `Stop at the 100th recursion level`, `Make the recursive member run only once`, `Drop already-seen rows so the cycle runs dry`],
+      answer: 3,
+      why: `UNION removes duplicate rows, so a cycle that regenerates the same node eventually yields nothing new and stops. This only works if the rows are identical, e.g. no growing path column.` },
+
+    { id: 'subqueries-17', type: 'mcq', tag: 'theory',
+      q: `When does a recursive CTE stop iterating?`,
+      options: [`When the latest recursive step returns no rows`, `After 100 iterations, by default`, `When the working table equals the anchor result`, `When the outer query has read its first row`],
+      answer: 0,
+      why: `Recursion ends when an iteration produces no new rows. PostgreSQL has no default depth cap (that is SQL Server's MAXRECURSION), so a bad condition loops forever.` },
+
+    { id: 'subqueries-18', type: 'mcq', tag: 'postgres',
+      q: `What does this return in PostgreSQL?`,
+      code: `WITH RECURSIVE n(i) AS (
+  SELECT 1
+  UNION ALL
+  SELECT i + 1 FROM n
+)
+SELECT i FROM n LIMIT 3;`,
+      options: [`It loops until memory runs out`, `Error: recursion has no stop condition`, `An empty result`, `Rows 1, 2, 3`],
+      answer: 3,
+      why: `The CTE is evaluated lazily and the outer LIMIT stops the executor after three rows. The query is risky without LIMIT, but PostgreSQL does not reject it up front.` },
+
+    { id: 'subqueries-19', type: 'mcq', tag: 'theory',
+      q: `What does LATERAL let a FROM-clause subquery do?`,
+      options: [`Run in parallel with the other FROM items`, `Return more than one column`, `Reference columns of FROM items listed before it`, `Skip the alias requirement`],
+      answer: 2,
+      why: `LATERAL lets the subquery refer to earlier FROM items, evaluated per row (like a correlated subquery, but in FROM and able to return many rows). It has nothing to do with parallelism.` },
+
+    { id: 'subqueries-20', type: 'mcq', tag: 'syntax',
+      q: `How do you keep outer rows whose LATERAL subquery returns nothing?`,
+      options: [`LEFT JOIN LATERAL (...) s ON true`, `LEFT JOIN LATERAL (...) s, with no ON`, `FULL LATERAL (...) s`, `CROSS JOIN LATERAL (...) s`],
+      answer: 0,
+      why: `A LEFT JOIN needs an ON clause, so use ON true; unmatched outer rows then get NULLs. CROSS JOIN LATERAL drops outer rows that find no match.` },
+
+    { id: 'subqueries-21', type: 'mcq', tag: 'interview',
+      q: `Customers with at least one order, each listed once: why prefer EXISTS over a plain JOIN to orders?`,
+      options: [`EXISTS always runs faster than any JOIN`, `A JOIN cannot filter on another table's rows`, `A JOIN repeats a customer once per matching order`, `EXISTS also returns the order columns`],
+      answer: 2,
+      why: `EXISTS only tests for a match, so each customer appears once. A JOIN fans out to one row per order, forcing a DISTINCT. EXISTS is not always faster, though.` },
+
+    { id: 'subqueries-22', type: 'mcq', tag: 'interview',
+      q: `One filtered aggregate is needed in two places of a query. What is the cleanest approach?`,
+      options: [`Copy the same subquery into both places`, `Write it once as a CTE and reference it twice`, `Use a correlated subquery at each place`, `Self-join the base table to reuse it`],
+      answer: 1,
+      why: `A CTE names the logic once, so it is readable and cannot drift between copies. Repeated subqueries duplicate code and work; a plain JOIN is the better fit for just combining tables.` },
+
+    { id: 'subqueries-r01', type: 'recall', tag: 'interview',
+      front: `Why can <code>x NOT IN (subquery)</code> return no rows, and what is the safe alternative?`,
+      back: `If the subquery returns any NULL, <code>NOT IN</code> evaluates to NULL (not true) for every row. Use <code>NOT EXISTS</code> (or filter NULLs out of the subquery).` },
+
+    { id: 'subqueries-r02', type: 'recall', tag: 'debug',
+      front: `Error "more than one row returned by a subquery used as an expression": name two fixes.`,
+      back: `Make it return one row: add <code>LIMIT 1</code> (with ORDER BY) or wrap in an aggregate. Or change the comparison to <code>IN</code> / <code>= ANY</code>.` },
+
+    { id: 'subqueries-r03', type: 'recall', tag: 'syntax',
+      front: `Write the skeleton of a recursive CTE.`,
+      back: `<code>WITH RECURSIVE t AS (</code> anchor <code>SELECT</code> ... <code>UNION ALL</code> recursive <code>SELECT</code> ... <code>FROM t</code> <code>WHERE</code> stop-condition <code>) SELECT ... FROM t</code>` },
+
+    { id: 'subqueries-r04', type: 'recall', tag: 'postgres',
+      front: `Which PostgreSQL 14+ clause detects cycles in a recursive CTE?`,
+      back: `<code>CYCLE id SET is_cycle USING path</code>, written after the CTE body. It flags a row that revisits a node and stops following it.` },
+
+    { id: 'subqueries-r05', type: 'recall', tag: 'postgres',
+      front: `PostgreSQL 12+: what do <code>MATERIALIZED</code> and <code>NOT MATERIALIZED</code> do to a CTE?`,
+      back: `<code>MATERIALIZED</code> computes the CTE once and stores it (a fence). <code>NOT MATERIALIZED</code> allows inlining so outer filters can be pushed in. Default: inline if used once, materialize if used more than once.` }
+  ]
+});
+DECKS.push({
+  id: 'windows',
+  name: 'Window Functions',
+  emoji: '🪟',
+  blurb: 'OVER, PARTITION BY, frames, ranking, LAG/LEAD, top-N.',
+  cards: [
+    { id: 'windows-01', type: 'mcq', tag: 'theory',
+      q: `How does <code>sum(x) OVER (...)</code> differ from <code>sum(x)</code> with GROUP BY?`,
+      options: [`It collapses rows to one per group`, `It runs before WHERE filters the rows`, `It requires an ORDER BY inside OVER`, `It keeps every input row and attaches the result`],
+      answer: 3,
+      why: `A window function computes over a set of related rows but leaves each input row in the output. GROUP BY collapses each group into one row.` },
+
+    { id: 'windows-02', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT x, sum(x) OVER () AS s
+FROM (VALUES (1),(2),(3)) t(x);`,
+      options: [`(1, 1), (2, 3), (3, 6)`, `(1, 6), (2, 6), (3, 6)`, `One row: 6`, `Error: needs GROUP BY`],
+      answer: 1,
+      why: `Empty OVER () makes the whole result one window, so every row shows the total 6. A running total needs ORDER BY inside OVER.` },
+
+    { id: 'windows-03', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT g, v, sum(v) OVER (PARTITION BY g)
+FROM (VALUES ('a',1),('a',2),('b',5))
+  t(g,v);`,
+      options: [`(a,1,1), (a,2,3), (b,5,5)`, `(a,1,8), (a,2,8), (b,5,8)`, `(a,3), (b,5): two rows`, `(a,1,3), (a,2,3), (b,5,5)`],
+      answer: 3,
+      why: `PARTITION BY g sums within each group but keeps every row, so both a rows show 3. The running pattern (1, 3) needs ORDER BY, and two rows would need GROUP BY.` },
+
+    { id: 'windows-04', type: 'mcq', tag: 'theory',
+      q: `With ORDER BY inside OVER and no frame clause, what is the default frame?`,
+      options: [`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, `The entire partition`, `ROWS BETWEEN 1 PRECEDING AND CURRENT ROW`],
+      answer: 1,
+      why: `The default is RANGE from the partition start to the current row, which includes peers (ties). Without ORDER BY the frame is the whole partition; ROWS must be written explicitly.` },
+
+    { id: 'windows-05', type: 'mcq', tag: 'output',
+      q: `What is the running sum column?`,
+      code: `SELECT v, sum(v) OVER (ORDER BY v)
+FROM (VALUES (1),(2),(2),(3)) t(v);`,
+      options: [`1, 3, 5, 8`, `1, 5, 5, 8`, `1, 3, 3, 8`, `8, 8, 8, 8`],
+      answer: 1,
+      why: `The default RANGE frame includes tied peers, so both 2s see 1 + 2 + 2 = 5. 1, 3, 5, 8 is what ROWS would give.` },
+
+    { id: 'windows-06', type: 'mcq', tag: 'output',
+      q: `What are the rank() values, top to bottom?`,
+      code: `SELECT v,
+  rank() OVER (ORDER BY v DESC) r
+FROM (VALUES (30),(20),(20),(10)) t(v);`,
+      options: [`1, 2, 2, 3`, `1, 3, 3, 4`, `1, 2, 2, 4`, `1, 2, 3, 4`],
+      answer: 2,
+      why: `rank() gives ties the same rank and then skips: after two 2s, the next rank is 4. Without gaps (1, 2, 2, 3) is dense_rank().` },
+
+    { id: 'windows-07', type: 'mcq', tag: 'output',
+      q: `What are the dense_rank() values, top to bottom?`,
+      code: `SELECT v,
+  dense_rank() OVER (ORDER BY v) r
+FROM (VALUES (5),(5),(5),(7)) t(v);`,
+      options: [`1, 1, 1, 2`, `1, 1, 1, 4`, `1, 2, 3, 4`, `1, 2, 2, 3`],
+      answer: 0,
+      why: `dense_rank() gives ties the same rank and never leaves gaps, so 7 gets 2. rank() would give 1, 1, 1, 4.` },
+
+    { id: 'windows-08', type: 'mcq', tag: 'theory',
+      q: `Two rows tie on the ORDER BY of <code>row_number() OVER (ORDER BY v)</code>. What numbers do they get?`,
+      options: [`The same number`, `The same number, then a gap`, `NULL for both`, `Different numbers, in arbitrary order`],
+      answer: 3,
+      why: `row_number() always assigns unique consecutive numbers; between tied rows the order is arbitrary unless you add a tiebreaker column. Sharing a number is what rank() does.` },
+
+    { id: 'windows-09', type: 'mcq', tag: 'output',
+      q: `What are the ntile values for 5 rows?`,
+      code: `SELECT v, ntile(2) OVER (ORDER BY v) b
+FROM generate_series(1,5) v;`,
+      options: [`1, 1, 2, 2, 2`, `1, 1, 1, 2, 2`, `1, 1, 2, 2, NULL`, `1, 2, 1, 2, 1`],
+      answer: 1,
+      why: `ntile(2) splits 5 rows into buckets of 3 and 2: the leftover rows go to the earliest buckets. Buckets are numbered in ORDER BY order, not dealt round-robin.` },
+
+    { id: 'windows-10', type: 'mcq', tag: 'output',
+      q: `What is the lag column?`,
+      code: `SELECT v, lag(v) OVER (ORDER BY v)
+FROM (VALUES (10),(20),(30)) t(v);`,
+      options: [`10, 20, 30`, `NULL, 10, 20`, `0, 10, 20`, `10, 20, NULL`],
+      answer: 1,
+      why: `lag(v) reads the previous row, and the first row has none, so the default is NULL. 10, 20, NULL is what lead() would return.` },
+
+    { id: 'windows-11', type: 'mcq', tag: 'output',
+      q: `What is the lag column?`,
+      code: `SELECT v, lag(v, 2, -1) OVER (ORDER BY v)
+FROM (VALUES (10),(20),(30)) t(v);`,
+      options: [`-1, 10, 20`, `NULL, NULL, 10`, `10, 20, 30`, `-1, -1, 10`],
+      answer: 3,
+      why: `lag(value, offset, default) looks 2 rows back and returns -1 where no such row exists. Only the third row has a row two back, so it gets 10.` },
+
+    { id: 'windows-12', type: 'mcq', tag: 'output',
+      q: `What is column d?`,
+      code: `SELECT lead(v) OVER (ORDER BY v) - v d
+FROM (VALUES (1),(4),(9)) t(v);`,
+      options: [`3, 5, NULL`, `NULL, 3, 5`, `-3, -5, NULL`, `3, 5, 0`],
+      answer: 0,
+      why: `lead(v) is the next row's value minus v: 4 - 1 = 3, 9 - 4 = 5, and the last row has no next row, so NULL. NULL, 3, 5 would be lag().` },
+
+    { id: 'windows-13', type: 'mcq', tag: 'output',
+      q: `What is the last_value column?`,
+      code: `SELECT v, last_value(v) OVER (ORDER BY v)
+FROM (VALUES (1),(2),(3)) t(v);`,
+      options: [`3, 3, 3`, `1, 2, 3`, `1, 1, 1`, `NULL, NULL, 3`],
+      answer: 1,
+      why: `The default frame ends at the current row, so the last value in it is the current row's own value. This is the classic last_value trap, not "3 for everyone".` },
+
+    { id: 'windows-14', type: 'mcq', tag: 'debug',
+      q: `last_value(v) OVER (ORDER BY v) just echoes the current row. Which frame returns the partition's last value?`,
+      options: [`ROWS BETWEEN CURRENT ROW AND CURRENT ROW`, `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, `ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`, `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`],
+      answer: 3,
+      why: `The frame must extend to the partition's end, so use UNBOUNDED FOLLOWING. The RANGE option is the default frame, which is exactly the bug.` },
+
+    { id: 'windows-15', type: 'mcq', tag: 'output',
+      q: `What is the running total column?`,
+      code: `SELECT v, sum(v) OVER (
+  ORDER BY v ROWS UNBOUNDED PRECEDING)
+FROM (VALUES (5),(5),(10)) t(v);`,
+      options: [`10, 10, 20`, `5, 5, 10`, `5, 10, 20`, `20, 20, 20`],
+      answer: 2,
+      why: `ROWS counts physical rows, so each tied 5 gets its own step: 5, 10, 20. With the default RANGE frame the two 5s would be peers and both show 10.` },
+
+    { id: 'windows-16', type: 'mcq', tag: 'output',
+      q: `What is the moving average column?`,
+      code: `SELECT v, avg(v) OVER (ORDER BY v
+  ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)
+FROM (VALUES (2),(4),(8)) t(v);`,
+      options: [`2, 3, 6`, `2, 3, 4.67`, `2, 4, 8`, `4.67, 4.67, 4.67`],
+      answer: 0,
+      why: `Each frame holds the current and previous row: 2, then avg(2,4) = 3, then avg(4,8) = 6. 2, 3, 4.67 would be a cumulative average from the first row.` },
+
+    { id: 'windows-17', type: 'mcq', tag: 'theory',
+      q: `How does a RANGE frame differ from a ROWS frame?`,
+      options: [`RANGE ignores the ORDER BY column`, `RANGE counts physical rows and ROWS counts values`, `RANGE treats rows with equal ORDER BY values as peers`, `RANGE works only on date columns`],
+      answer: 2,
+      why: `ROWS counts physical rows from the current one; RANGE works on ORDER BY values, so all peers of the current row are included together. Counting physical rows is ROWS, not RANGE.` },
+
+    { id: 'windows-18', type: 'mcq', tag: 'debug', noRun: true,
+      q: `PostgreSQL rejects this query. What is the standard fix?`,
+      code: `SELECT id, v FROM t
+WHERE rank() OVER (ORDER BY v) = 1;`,
+      options: [`Replace WHERE with HAVING`, `Move the rank() call into GROUP BY`, `Rank in a CTE, filter in the outer query`, `Add DISTINCT before id`],
+      answer: 2,
+      why: `Window functions are computed after WHERE, so they cannot appear in it. Compute the rank in a subquery or CTE and filter in the outer query. HAVING does not allow them either.` },
+
+    { id: 'windows-19', type: 'mcq', tag: 'order',
+      q: `In a query with GROUP BY, when do window functions run?`,
+      options: [`After grouping and HAVING, over the grouped rows`, `Before WHERE, over the raw table`, `After WHERE but before GROUP BY`, `After ORDER BY and LIMIT`],
+      answer: 0,
+      why: `Order is FROM, WHERE, GROUP BY, HAVING, then window functions, then SELECT output, DISTINCT, ORDER BY, LIMIT. So a window can wrap an aggregate like <code>rank() OVER (ORDER BY sum(x))</code>.` },
+
+    { id: 'windows-20', type: 'mcq', tag: 'output',
+      q: `Which rows does this return?`,
+      code: `WITH t(g,v) AS (VALUES
+  ('a',1),('a',9),('b',4),('b',7),('b',2))
+SELECT g, v FROM (
+  SELECT g, v, row_number() OVER (
+    PARTITION BY g ORDER BY v DESC) rn
+  FROM t) s WHERE rn = 1 ORDER BY g;`,
+      options: [`(a,1) and (b,2)`, `(a,9) and (b,7)`, `(a,9) only`, `(a,9), (b,7), (b,4)`],
+      answer: 1,
+      why: `Numbering restarts per group, highest v first, so rn = 1 is each group's maximum. This is the standard top-N-per-group pattern; (a,9) alone would mean no PARTITION BY.` },
+
+    { id: 'windows-21', type: 'mcq', tag: 'interview',
+      q: `Highest-paid employee per department, keeping everyone tied for first. Which function, filtered to 1?`,
+      options: [`row_number()`, `lag(sal)`, `ntile(2)`, `rank()`],
+      answer: 3,
+      why: `rank() gives all ties the value 1, so filtering rank() = 1 keeps every tied top earner. row_number() = 1 keeps just one of them, chosen arbitrarily.` },
+
+    { id: 'windows-22', type: 'mcq', tag: 'syntax',
+      q: `Where does the named <code>WINDOW w AS (...)</code> clause go in a SELECT?`,
+      options: [`After HAVING, before ORDER BY`, `After ORDER BY`, `Between FROM and WHERE`, `Before SELECT, like WITH`],
+      answer: 0,
+      why: `The order is FROM, WHERE, GROUP BY, HAVING, WINDOW, then ORDER BY and LIMIT. It is not a prefix clause like WITH.` },
+
+    { id: 'windows-23', type: 'mcq', tag: 'output',
+      q: `What is the prior column?`,
+      code: `SELECT v, sum(v) OVER w - v AS prior
+FROM (VALUES (1),(2),(3)) t(v)
+WINDOW w AS (ORDER BY v);`,
+      options: [`1, 3, 6`, `6, 5, 3`, `0, 1, 2`, `0, 1, 3`],
+      answer: 3,
+      why: `The named window gives running sums 1, 3, 6, and subtracting v leaves the sum of earlier rows: 0, 1, 3. 1, 3, 6 is the running sum without the subtraction.` },
+
+    { id: 'windows-24', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, which of these accepts <code>FILTER (WHERE ...)</code> before OVER?`,
+      options: [`rank()`, `row_number()`, `lag(x)`, `sum(x)`],
+      answer: 3,
+      why: `FILTER works on aggregates used as window functions, like sum(x) FILTER (WHERE ...) OVER (...). Pure window functions such as rank() raise an error if you add it.` },
+
+    { id: 'windows-r01', type: 'recall', tag: 'theory',
+      front: `ROW_NUMBER vs RANK vs DENSE_RANK on ties: how does each behave?`,
+      back: `<code>row_number</code>: unique 1,2,3,4. <code>rank</code>: ties share a rank, then a gap (1,2,2,4). <code>dense_rank</code>: ties share a rank, no gap (1,2,2,3).` },
+
+    { id: 'windows-r02', type: 'recall', tag: 'theory',
+      front: `What is the default window frame when OVER has ORDER BY?`,
+      back: `<code>RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code>. Rows tied on the ORDER BY value are peers, and all of them fall inside the frame.` },
+
+    { id: 'windows-r03', type: 'recall', tag: 'interview',
+      front: `How do you get the top N rows per group in PostgreSQL?`,
+      back: `Number rows in a subquery or CTE with <code>row_number() OVER (PARTITION BY g ORDER BY x DESC)</code> as rn, then filter <code>WHERE rn &lt;= N</code> in the outer query. Use rank() to keep ties.` },
+
+    { id: 'windows-r04', type: 'recall', tag: 'debug',
+      front: `Why does last_value return the current row's value, and how do you fix it?`,
+      back: `The default frame stops at the current row. Add <code>ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code> to the OVER clause.` },
+
+    { id: 'windows-r05', type: 'recall', tag: 'syntax',
+      front: `Write the frame clause for a 3-row moving average (current row and the 2 before it).`,
+      back: `<code>avg(x) OVER (ORDER BY d ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)</code>. The first rows average over fewer rows because the frame is cut off at the partition start.` }
+  ]
+});
+DECKS.push({
+  id: 'execution',
+  name: 'Execution Order & Theory',
+  emoji: '🧭',
+  blurb: 'Logical clause order, keys, normalization, indexes, EXPLAIN, ACID.',
+  cards: [
+    { id: 'execution-01', type: 'mcq', tag: 'order',
+      q: `In a query using GROUP BY, which clause is logically evaluated right after WHERE?`,
+      options: [`SELECT`, `HAVING`, `GROUP BY`, `ORDER BY`],
+      answer: 2,
+      why: `Rows are filtered by WHERE and only then collected into groups. HAVING needs the groups to exist first, and SELECT, with its aggregates, runs after both.` },
+    { id: 'execution-02', type: 'mcq', tag: 'output',
+      q: `What order does this return?`,
+      code: `SELECT d
+FROM (VALUES ('a'),('b'),('b')) t(d)
+GROUP BY d
+ORDER BY count(*) DESC;`,
+      options: [`a, b`, `b, a`, `Error: count(*) must appear in SELECT`, `b, b, a`],
+      answer: 1,
+      why: `ORDER BY runs after grouping, so it may use any aggregate, even one that is not in the SELECT list. b has 2 rows and a has 1, so b comes first.` },
+    { id: 'execution-03', type: 'mcq', tag: 'debug', noRun: true,
+      q: `This fails with: column "d" does not exist. Why?`,
+      code: `SELECT x * 2 AS d, d + 1 AS e
+FROM generate_series(1, 3) AS x;`,
+      options: [`d is a reserved word in PostgreSQL`, `Aliases must be double-quoted when reused`, `Arithmetic on an alias needs a cast`, `One SELECT item cannot see another's alias`],
+      answer: 3,
+      why: `Output aliases are not visible inside the SELECT list that defines them. Repeat the expression, or compute d in a subquery or LATERAL. Quoting or casting does not help.` },
+    { id: 'execution-04', type: 'mcq', tag: 'output',
+      q: `What order of x does this return?`,
+      code: `SELECT x
+FROM (VALUES (1,'b'), (2,'a')) AS t(x, y)
+ORDER BY y;`,
+      options: [`1, 2`, `2, 1`, `Error: y must be in the SELECT list`, `Unspecified; y is not selected`],
+      answer: 1,
+      why: `ORDER BY may sort by a column that is not selected. y sorts a before b, so x = 2 comes first. The error is tempting, but it applies only with SELECT DISTINCT.` },
+    { id: 'execution-05', type: 'mcq', tag: 'output',
+      q: `What does this return in PostgreSQL?`,
+      code: `SELECT x % 2 AS parity, count(*) AS n
+FROM generate_series(1, 5) AS x
+GROUP BY parity
+ORDER BY parity;`,
+      options: [`Error: column "parity" does not exist`, `(0, 3) and (1, 2)`, `(0, 2) and (1, 3)`, `(0, 5)`],
+      answer: 2,
+      why: `PostgreSQL lets GROUP BY use an output alias (an extension to standard SQL). Evens 2, 4 give (0, 2); odds 1, 3, 5 give (1, 3). The alias error applies to WHERE and HAVING, not GROUP BY.` },
+    { id: 'execution-06', type: 'mcq', tag: 'debug', noRun: true,
+      q: `This fails: for SELECT DISTINCT, ORDER BY expressions must appear in select list. Why?`,
+      code: `SELECT DISTINCT x
+FROM (VALUES (1,'b'), (1,'c'), (2,'a'))
+  AS t(x, y)
+ORDER BY y;`,
+      options: [`DISTINCT merges rows, so one x has several y values`, `DISTINCT and ORDER BY cannot be combined`, `y must be given an alias before sorting`, `ORDER BY runs before DISTINCT and loses y`],
+      answer: 0,
+      why: `DISTINCT collapses the two x = 1 rows first, leaving no single y to sort that row by. Add y to the select list, or use DISTINCT ON.` },
+    { id: 'execution-07', type: 'mcq', tag: 'postgres',
+      q: `Which of these clauses may contain a window function such as row_number() in PostgreSQL?`,
+      options: [`WHERE`, `ORDER BY`, `GROUP BY`, `HAVING`],
+      answer: 1,
+      why: `Window functions run after WHERE, GROUP BY and HAVING, so they are allowed only in the SELECT list and ORDER BY. To filter on one, use a subquery or CTE. PostgreSQL has no QUALIFY.` },
+    { id: 'execution-08', type: 'mcq', tag: 'output',
+      q: `What is c in each returned row?`,
+      code: `SELECT x, count(*) OVER () AS c
+FROM generate_series(1, 5) AS x
+WHERE x > 2;`,
+      options: [`5`, `1`, `1, 2, 3 (a running count)`, `3`],
+      answer: 3,
+      why: `WHERE runs first and leaves x = 3, 4, 5. The window function then sees only those 3 rows, so c = 3 on every row. Counting 5 would mean the window ran before WHERE.` },
+    { id: 'execution-09', type: 'mcq', tag: 'order',
+      q: `In what order do DISTINCT, ORDER BY and LIMIT logically apply?`,
+      options: [`DISTINCT, then ORDER BY, then LIMIT`, `ORDER BY, then LIMIT, then DISTINCT`, `LIMIT, then DISTINCT, then ORDER BY`, `DISTINCT, then LIMIT, then ORDER BY`],
+      answer: 0,
+      why: `SELECT produces rows, DISTINCT removes duplicates, ORDER BY sorts, and LIMIT keeps the top slice. LIMIT before ORDER BY would return arbitrary rows, not the top ones.` },
+    { id: 'execution-10', type: 'mcq', tag: 'output',
+      q: `Which x values come back, in order?`,
+      code: `SELECT x
+FROM (VALUES (3), (1), (2)) AS v(x)
+ORDER BY x DESC
+LIMIT 2;`,
+      options: [`3, 1`, `1, 2`, `3, 2`, `2, 1`],
+      answer: 2,
+      why: `ORDER BY sorts all rows (3, 2, 1) before LIMIT keeps the first two. 3, 1 is what you would get if LIMIT cut the unsorted rows first.` },
+    { id: 'execution-11', type: 'mcq', tag: 'theory',
+      q: `The planner may run steps in a different order than the logical order. What must stay true?`,
+      options: [`Nothing; it may reorder freely`, `The result must equal the logical-order result`, `WHERE must still run before every JOIN`, `Only index scans may change the order`],
+      answer: 1,
+      why: `Logical order defines what a query means; the optimizer may push filters down or reorder joins as long as the result is identical. It may not change results.` },
+    { id: 'execution-12', type: 'mcq', tag: 'interview',
+      q: `Rows tie on score. How do you make ORDER BY score LIMIT 10 return the same rows every run?`,
+      options: [`Use a larger LIMIT and discard extras`, `Add DISTINCT to the SELECT`, `Add NULLS LAST to the sort key`, `Add a unique column as the last sort key`],
+      answer: 3,
+      why: `Within a tie, the order is unspecified and can change between runs. A unique final key such as id makes the order total. DISTINCT and NULLS LAST add no tiebreak.` },
+    { id: 'execution-13', type: 'mcq', tag: 'theory',
+      q: `Which best describes a SQL table or query result?`,
+      options: [`An unordered multiset (bag) of rows`, `An ordered list of unique rows`, `An unordered set of unique rows`, `An array addressed by row number`],
+      answer: 0,
+      why: `Relational theory uses sets, but SQL allows duplicate rows (hence DISTINCT and UNION ALL) and has no inherent order or row position.` },
+    { id: 'execution-14', type: 'mcq', tag: 'theory',
+      q: `What does a PRIMARY KEY constraint enforce?`,
+      options: [`UNIQUE only; NULLs are allowed`, `NOT NULL only; duplicates are allowed`, `UNIQUE and NOT NULL`, `UNIQUE and auto-incrementing values`],
+      answer: 2,
+      why: `A primary key is unique plus not null, and it may span several columns. Auto-increment is a separate feature (identity columns).` },
+    { id: 'execution-15', type: 'mcq', tag: 'postgres',
+      q: `How many PRIMARY KEY and UNIQUE constraints can one PostgreSQL table have?`,
+      options: [`One of each`, `One PRIMARY KEY, any number of UNIQUE`, `Any number of each`, `Any number of PRIMARY KEY, one UNIQUE`],
+      answer: 1,
+      why: `A table has at most one primary key (possibly composite) but any number of UNIQUE constraints. "One of each" is tempting; UNIQUE has no such cap.` },
+    { id: 'execution-16', type: 'mcq', tag: 'theory',
+      q: `What does a FOREIGN KEY constraint guarantee?`,
+      options: [`The referencing column is automatically indexed`, `Joins on that column run faster`, `Referenced rows can never be deleted`, `Non-NULL values exist in the referenced key`],
+      answer: 3,
+      why: `Every non-NULL value must match a row in the referenced table. PostgreSQL does not auto-index the referencing column, and ON DELETE CASCADE can delete referenced rows.` },
+    { id: 'execution-17', type: 'mcq', tag: 'theory',
+      q: `A column storing 'red,blue,green' in one value violates which normal form?`,
+      options: [`1NF`, `2NF`, `3NF`, `BCNF`],
+      answer: 0,
+      why: `1NF requires atomic values: one value per cell. Use a child table instead. 2NF and 3NF concern dependencies on keys and assume 1NF already holds.` },
+    { id: 'execution-18', type: 'mcq', tag: 'interview',
+      q: `emp(id PK, dept_id, dept_name): dept_name depends on dept_id. Which normal form does this break?`,
+      options: [`1NF`, `2NF`, `3NF`, `None; it is fully normalized`],
+      answer: 2,
+      why: `A non-key column depending on another non-key column is a transitive dependency, which 3NF forbids. 2NF is about partial dependency on part of a composite key; this key is one column.` },
+    { id: 'execution-19', type: 'mcq', tag: 'postgres',
+      q: `What is PostgreSQL's default transaction isolation level?`,
+      options: [`Read Uncommitted`, `Read Committed`, `Repeatable Read`, `Serializable`],
+      answer: 1,
+      why: `The default is Read Committed: each statement sees data committed before that statement began. Stricter levels must be requested explicitly.` },
+    { id: 'execution-20', type: 'mcq', tag: 'interview',
+      q: `Index on (last_name, first_name). Which filter best uses the leading column to narrow the search?`,
+      options: [`WHERE first_name = 'Ana'`, `WHERE first_name LIKE 'A%'`, `WHERE last_name <> 'Kim'`, `WHERE last_name = 'Kim'`],
+      answer: 3,
+      why: `A composite B-tree is sorted by the first column, then the second. Equality on the leading column gives a tight range. Filters on first_name alone lack the leading column.` },
+    { id: 'execution-21', type: 'mcq', tag: 'interview',
+      q: `A plain B-tree index exists on email. Why can't WHERE lower(email) = 'a@x.io' use it?`,
+      options: [`The index stores raw values, not lower(email)`, `B-tree indexes only work on numeric columns`, `Indexes cannot serve equality on text`, `lower() is volatile, so never indexable`],
+      answer: 0,
+      why: `The index is sorted by email, not lower(email). Build an expression index on lower(email) or rewrite the predicate. lower() is immutable, so it is indexable.` },
+    { id: 'execution-22', type: 'mcq', tag: 'theory',
+      q: `Why can't a B-tree index help WHERE name LIKE '%son'?`,
+      options: [`LIKE can never use any kind of index`, `B-trees only support equality comparisons`, `The index is sorted from the first character`, `The wildcard forces a cast that blocks indexes`],
+      answer: 2,
+      why: `A B-tree orders values from the first character, so a known prefix gives a range. A leading % has no prefix. A pg_trgm GIN index can serve it, so "never any index" is wrong.` },
+    { id: 'execution-23', type: 'mcq', tag: 'syntax',
+      q: `Which statement runs the query and reports actual row counts and timings?`,
+      options: [`EXPLAIN VERBOSE SELECT ...`, `EXPLAIN ANALYZE SELECT ...`, `EXPLAIN (COSTS) SELECT ...`, `ANALYZE SELECT ...`],
+      answer: 1,
+      why: `The ANALYZE option executes the statement and measures it. Plain EXPLAIN shows only estimates. A standalone ANALYZE refreshes table statistics and is not a plan command.` },
+    { id: 'execution-24', type: 'mcq', tag: 'interview',
+      q: `A transfer debits account A, then crashes before crediting B. Which ACID property undoes the debit?`,
+      options: [`Consistency`, `Isolation`, `Durability`, `Atomicity`],
+      answer: 3,
+      why: `Atomicity makes a transaction all-or-nothing, so the debit is rolled back. Durability is about committed data surviving crashes; Isolation is about concurrent transactions.` },
+
+    { id: 'execution-r01', type: 'recall', tag: 'order',
+      front: `List the logical processing order of a SELECT query.`,
+      back: `<code>FROM/JOIN</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>SELECT</code> (incl. window functions) → <code>DISTINCT</code> → <code>ORDER BY</code> → <code>LIMIT/OFFSET</code>.` },
+    { id: 'execution-r02', type: 'recall', tag: 'theory',
+      front: `In ACID, what does Isolation guarantee?`,
+      back: `Concurrent transactions do not see each other's partial work. How much they do see depends on the isolation level (Read Committed, Repeatable Read, Serializable).` },
+    { id: 'execution-r03', type: 'recall', tag: 'interview',
+      front: `Make index-friendly: <code>WHERE extract(year FROM hire_date) = 2020</code>`,
+      back: `<code>WHERE hire_date &gt;= '2020-01-01' AND hire_date &lt; '2021-01-01'</code>. Keep the column bare so a B-tree range scan works.` },
+    { id: 'execution-r04', type: 'recall', tag: 'theory',
+      front: `What is the main cost of denormalizing a table?`,
+      back: `Redundant data can drift out of sync, and writes get more complex because every copy must be updated. The gain is fewer joins and faster reads.` },
+    { id: 'execution-r05', type: 'recall', tag: 'order',
+      front: `Name three ways to reuse a computed expression in a WHERE filter.`,
+      back: `Repeat the expression; wrap the query in a subquery/CTE and filter outside; or compute it in <code>CROSS JOIN LATERAL (SELECT expr AS alias)</code>.` },
+    { id: 'execution-r06', type: 'recall', tag: 'postgres',
+      front: `How can you EXPLAIN ANALYZE an UPDATE without keeping its changes?`,
+      back: `ANALYZE really executes it. Wrap it: <code>BEGIN; EXPLAIN ANALYZE UPDATE ...; ROLLBACK;</code>` }
+  ]
+});
+DECKS.push({
+  id: 'set-ops',
+  name: 'Set Operations & Pivoting',
+  emoji: '🙏',
+  blurb: 'UNION, INTERSECT, EXCEPT, precedence, pivot and unpivot.',
+  cards: [
+    { id: 'set-ops-01', type: 'mcq', tag: 'theory',
+      q: `How does UNION differ from UNION ALL?`,
+      options: [`UNION removes duplicates; UNION ALL keeps all rows`, `UNION keeps duplicates; UNION ALL removes them`, `UNION sorts the rows; UNION ALL does not`, `UNION needs matching names; UNION ALL does not`],
+      answer: 0,
+      why: `UNION returns distinct rows; UNION ALL simply appends. Neither promises sorted output, and neither cares about column names, only count and types.` },
+    { id: 'set-ops-02', type: 'mcq', tag: 'output',
+      q: `How many rows does this return?`,
+      code: `SELECT 1 AS n
+UNION ALL
+SELECT 1
+UNION
+SELECT 2;`,
+      options: [`3`, `4`, `2`, `1`],
+      answer: 2,
+      why: `Operators combine left to right: (1 UNION ALL 1) UNION 2. The final UNION deduplicates the whole accumulated result, leaving 1 and 2. Only a trailing UNION ALL keeps duplicates.` },
+    { id: 'set-ops-03', type: 'mcq', tag: 'theory',
+      q: `Why is UNION ALL usually faster than UNION?`,
+      options: [`It runs both queries in parallel`, `It skips the duplicate-removal sort or hash step`, `It can use indexes that UNION cannot`, `It returns only the first query's rows`],
+      answer: 1,
+      why: `UNION must sort or hash all rows to find duplicates. UNION ALL just streams both inputs. Use it whenever duplicates are impossible or acceptable.` },
+    { id: 'set-ops-04', type: 'mcq', tag: 'debug', noRun: true,
+      q: `What happens when this runs?`,
+      code: `SELECT first_name, last_name
+FROM employees
+UNION
+SELECT department_name
+FROM departments;`,
+      options: [`The missing column is padded with NULL`, `It runs and ignores last_name`, `It works only if written as UNION ALL`, `Error: each query needs the same column count`],
+      answer: 3,
+      why: `PostgreSQL requires every query in a set operation to return the same number of columns. It never pads with NULL; add NULL AS last_name yourself.` },
+    { id: 'set-ops-05', type: 'mcq', tag: 'postgres', noRun: true,
+      q: `Why does this fail in PostgreSQL?`,
+      code: `SELECT employee_id
+FROM employees
+UNION
+SELECT department_name
+FROM departments;`,
+      options: [`integer and text have no common type`, `UNION requires identical column names`, `PostgreSQL never converts types in a UNION`, `The first query needs an ORDER BY`],
+      answer: 0,
+      why: `Error: UNION types integer and text cannot be matched. PostgreSQL does resolve compatible types (integer with numeric works), so "never converts" is wrong. Cast explicitly.` },
+    { id: 'set-ops-06', type: 'mcq', tag: 'output',
+      q: `What are the result column names?`,
+      code: `SELECT 1 AS a, 2 AS b
+UNION ALL
+SELECT 3 AS x, 4 AS y;`,
+      options: [`x, y`, `a, y`, `a, b`, `?column?, ?column?`],
+      answer: 2,
+      why: `Column names come from the first query only. Later aliases are ignored; columns are matched by position, not by name.` },
+    { id: 'set-ops-07', type: 'mcq', tag: 'order',
+      q: `In SELECT ... UNION ALL SELECT ... ORDER BY n, which rows does the trailing ORDER BY sort?`,
+      options: [`Only the last SELECT`, `The entire combined result`, `Only the first SELECT`, `Each SELECT separately`],
+      answer: 1,
+      why: `A trailing ORDER BY (and LIMIT) belongs to the whole set operation. To sort one branch only, wrap it in parentheses with its own LIMIT.` },
+    { id: 'set-ops-08', type: 'mcq', tag: 'debug', noRun: true,
+      q: `This raises a syntax error near UNION. Why?`,
+      code: `SELECT first_name
+FROM employees
+ORDER BY first_name
+UNION
+SELECT department_name
+FROM departments;`,
+      options: [`ORDER BY is forbidden with UNION`, `UNION needs ALL when sorting`, `first_name needs a table alias`, `ORDER BY must trail the whole query`],
+      answer: 3,
+      why: `A bare ORDER BY can only trail the whole set operation. Move it to the end, or wrap that SELECT in parentheses (usually with a LIMIT). It is not forbidden outright.` },
+    { id: 'set-ops-09', type: 'mcq', tag: 'syntax',
+      q: `What does INTERSECT return?`,
+      options: [`Distinct rows that appear in both queries`, `Distinct rows in the first query but not the second`, `All rows from both queries, deduplicated`, `Every pairing of rows from both queries`],
+      answer: 0,
+      why: `INTERSECT keeps rows present in both inputs, deduplicated. Rows only in the first is EXCEPT, all rows deduplicated is UNION, and every pairing is a CROSS JOIN.` },
+    { id: 'set-ops-10', type: 'mcq', tag: 'output',
+      q: `Which x values does this return?`,
+      code: `SELECT x FROM (VALUES (1),(2),(2),(3)) v(x)
+EXCEPT
+SELECT 2
+ORDER BY x;`,
+      options: [`1, 2, 3`, `1, 2, 2, 3`, `1, 3`, `2`],
+      answer: 2,
+      why: `EXCEPT removes every left row equal to a right row, so both 2s go, and the result is distinct. Subtracting by count is EXCEPT ALL.` },
+    { id: 'set-ops-11', type: 'mcq', tag: 'output',
+      q: `Which x values does this return?`,
+      code: `SELECT x FROM (VALUES (1),(2),(2),(3)) v(x)
+EXCEPT ALL
+SELECT 2
+ORDER BY x;`,
+      options: [`1, 3`, `1, 2, 3`, `1, 2, 2, 3`, `2`],
+      answer: 1,
+      why: `EXCEPT ALL subtracts occurrences: two 2s minus one 2 leaves one 2. Plain EXCEPT would remove every 2.` },
+    { id: 'set-ops-12', type: 'mcq', tag: 'output',
+      q: `How many rows does this return?`,
+      code: `SELECT x FROM (VALUES (1),(1),(1)) v(x)
+INTERSECT ALL
+SELECT x FROM (VALUES (1),(1)) v(x);`,
+      options: [`1`, `3`, `5`, `2`],
+      answer: 3,
+      why: `INTERSECT ALL keeps min(left count, right count) copies: min(3, 2) = 2. Plain INTERSECT would return a single row.` },
+    { id: 'set-ops-13', type: 'mcq', tag: 'order',
+      q: `How many rows does this return?`,
+      code: `SELECT 1 AS n
+UNION
+SELECT 2
+INTERSECT
+SELECT 2;`,
+      options: [`2`, `1`, `3`, `0`],
+      answer: 0,
+      why: `INTERSECT binds tighter than UNION: 2 INTERSECT 2 = {2}, then 1 UNION {2} = {1, 2}. Strict left-to-right would give one row, {2}.` },
+    { id: 'set-ops-14', type: 'mcq', tag: 'order',
+      q: `What does this return?`,
+      code: `SELECT 1 AS n
+UNION
+SELECT 2
+EXCEPT
+SELECT 1;`,
+      options: [`1, 2`, `1`, `2`, `Nothing`],
+      answer: 2,
+      why: `UNION and EXCEPT share one precedence level and run left to right: (1 UNION 2) EXCEPT 1 = 2. Only INTERSECT binds tighter. Use parentheses to be explicit.` },
+    { id: 'set-ops-15', type: 'mcq', tag: 'theory',
+      q: `How does UNION combine result sets, compared with JOIN?`,
+      options: [`UNION adds columns; JOIN adds rows`, `UNION adds rows; JOIN adds columns`, `UNION matches by key; JOIN matches by position`, `They differ only in duplicate handling`],
+      answer: 1,
+      why: `UNION stacks result sets vertically, matching columns by position. JOIN widens rows horizontally using a condition. The key-versus-position option is backwards.` },
+    { id: 'set-ops-16', type: 'mcq', tag: 'output',
+      q: `What does this conditional aggregation return?`,
+      code: `SELECT
+  sum(CASE WHEN k = 'a' THEN v END) AS a,
+  sum(CASE WHEN k = 'b' THEN v END) AS b
+FROM (VALUES ('a',1),('a',2),('b',5))
+  AS t(k, v);`,
+      options: [`One row: a=2, b=1`, `Two rows: one for a, one for b`, `Error: CASE needs an ELSE`, `One row: a=3, b=5`],
+      answer: 3,
+      why: `CASE without ELSE yields NULL for non-matching rows and sum() ignores NULLs, so a = 1+2 = 3 and b = 5. Aggregates without GROUP BY collapse everything into one row.` },
+    { id: 'set-ops-17', type: 'mcq', tag: 'theory',
+      q: `In a conditional-aggregation pivot, how are the output columns chosen?`,
+      options: [`You list each one in the SELECT`, `They come from the distinct values of k`, `They are set by the ORDER BY clause`, `They are set by the GROUP BY clause`],
+      answer: 0,
+      why: `Each pivoted column is its own sum(...) FILTER or CASE expression, so the column list is fixed in the SQL text. A dynamic list needs SQL generated by your application.` },
+    { id: 'set-ops-18', type: 'mcq', tag: 'interview',
+      q: `Why use UNION ALL, not UNION, when unpivoting columns into rows?`,
+      options: [`UNION cannot take more than two queries`, `UNION requires the same names in each query`, `UNION would merge rows that happen to be equal`, `UNION is not allowed with constant labels`],
+      answer: 2,
+      why: `Unpivoted rows are distinct source cells even if two values match. UNION would collapse equal rows and silently lose data, and it costs a dedup step.` },
+    { id: 'set-ops-19', type: 'mcq', tag: 'output',
+      q: `What does this unpivot return?`,
+      code: `SELECT t.id, u.k, u.v
+FROM (VALUES (1, 10, 20)) AS t(id, a, b)
+CROSS JOIN LATERAL (VALUES ('a', t.a),
+  ('b', t.b)) AS u(k, v);`,
+      options: [`One row: (1, 10, 20)`, `Rows (1, a, 10) and (1, b, 20)`, `Rows (1, a, 20) and (1, b, 10)`, `Error: VALUES cannot reference t`],
+      answer: 1,
+      why: `LATERAL lets the VALUES list see t.a and t.b, emitting one row per tuple for each input row. VALUES can reference t here precisely because of LATERAL.` },
+    { id: 'set-ops-20', type: 'mcq', tag: 'postgres',
+      q: `Which PostgreSQL extension provides the crosstab() pivot function?`,
+      options: [`hstore`, `pg_trgm`, `pivot`, `tablefunc`],
+      answer: 3,
+      why: `crosstab() lives in the tablefunc extension (CREATE EXTENSION tablefunc). PostgreSQL has no built-in PIVOT keyword; that is SQL Server and Oracle.` },
+
+    { id: 'set-ops-r01', type: 'recall', tag: 'syntax',
+      front: `How do you pivot rows into columns without crosstab?`,
+      back: `Conditional aggregation: <code>sum(v) FILTER (WHERE k = 'a')</code> or <code>sum(CASE WHEN k = 'a' THEN v END)</code>, one per output column, with GROUP BY for the row key.` },
+    { id: 'set-ops-r02', type: 'recall', tag: 'theory',
+      front: `Name two ways to unpivot columns into rows.`,
+      back: `<code>UNION ALL</code> of one SELECT per column, or <code>CROSS JOIN LATERAL (VALUES ('a', t.a), ('b', t.b))</code>, which scans the table only once.` },
+    { id: 'set-ops-r03', type: 'recall', tag: 'theory',
+      front: `What must be true of the SELECTs inside a UNION?`,
+      back: `They return the same number of columns, with compatible types matched by position.` },
+    { id: 'set-ops-r04', type: 'recall', tag: 'theory',
+      front: `What do INTERSECT ALL and EXCEPT ALL do with duplicates?`,
+      back: `INTERSECT ALL keeps the smaller of the two counts of each row; EXCEPT ALL subtracts the right count from the left count. Without ALL, both return distinct rows.` }
+  ]
+});
+DECKS.push({
+  id: 'functions',
+  name: 'Text, Dates, Math & CASE',
+  emoji: '🔤',
+  blurb: 'String, date, and math functions, NULLIF, GREATEST, and CASE rules.',
+  cards: [
+    { id: 'functions-01', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT LPAD('12345', 3, '0');`,
+      options: [`12345`, `123`, `345`, `Error: string too long`],
+      answer: 1,
+      why: `LPAD pads on the left, but when the string is already longer than the target length it truncates on the right, so 12345 becomes 123. It never raises an error.` },
+    { id: 'functions-02', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT CONCAT_WS('-', 'a', NULL, 'b');`,
+      options: [`a--b`, `a-NULL-b`, `a-b`, `NULL`],
+      answer: 2,
+      why: `CONCAT_WS skips NULL arguments entirely, so no extra separator appears. "a--b" wrongly assumes NULL becomes an empty string between two separators.` },
+    { id: 'functions-03', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT TRIM(BOTH 'x' FROM 'xxaxbxx');`,
+      options: [`axb`, `ab`, `a`, `xxaxbxx`],
+      answer: 0,
+      why: `TRIM only strips the given characters from the ends and stops at the first other character, so the inner x stays. "ab" would require removing every x.` },
+    { id: 'functions-04', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT SUBSTRING('postgres' FROM 5 FOR 3);`,
+      options: [`tgr`, `res`, `gres`, `gre`],
+      answer: 3,
+      why: `String positions are 1-based, so position 5 is "g" and 3 characters give "gre". "tgr" is what you would get by counting from 0.` },
+    { id: 'functions-05', type: 'mcq', tag: 'postgres',
+      q: `What does this return?`,
+      code: `SELECT POSITION('gr' IN 'postgres') AS p,
+       STRPOS('postgres', 'z') AS s;`,
+      options: [`4 | -1`, `5 | 0`, `5 | NULL`, `4 | 0`],
+      answer: 1,
+      why: `Positions are 1-based, and POSITION/STRPOS return 0 when the substring is not found. NULL or -1 are what other languages use, not PostgreSQL.` },
+    { id: 'functions-06', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT REPLACE('banana', 'an', '_');`,
+      options: [`b__a`, `b_ana`, `ban_a`, `banana`],
+      answer: 0,
+      why: `REPLACE swaps every occurrence of the search string. "b_ana" assumes only the first match is replaced.` },
+    { id: 'functions-07', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT REGEXP_REPLACE(
+  'a1b22c', '[0-9]+', '#');`,
+      options: [`a#b#c`, `a##b##c`, `a#b22c`, `a1b22c`],
+      answer: 2,
+      why: `Without the 'g' flag, REGEXP_REPLACE replaces only the first match. "a#b#c" assumes global replacement is the default.` },
+    { id: 'functions-08', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT DATE_TRUNC('month',
+       TIMESTAMP '2026-03-17 14:35');`,
+      options: [`2026-03-31 00:00:00`, `2026-03-17 00:00:00`, `2026-01-01 00:00:00`, `2026-03-01 00:00:00`],
+      answer: 3,
+      why: `DATE_TRUNC rounds down to the start of the unit, so the first day of March at midnight. "2026-03-17 00:00:00" is what the 'day' unit would give.` },
+    { id: 'functions-09', type: 'mcq', tag: 'theory',
+      q: `In PostgreSQL, what does EXTRACT(DOW FROM d) return when d is a Sunday?`,
+      options: [`1`, `0`, `7`, `6`],
+      answer: 1,
+      why: `DOW counts 0 to 6 starting on Sunday. ISODOW is the one that counts 1 to 7 from Monday, which makes Sunday 7.` },
+    { id: 'functions-10', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT DATE '2026-02-28' + 1;`,
+      options: [`2026-02-29`, `Error: date + integer`, `2026-03-01`, `2026-03-01 00:00:00`],
+      answer: 2,
+      why: `date + integer adds days and returns a date. 2026 is not a leap year, so Feb 28 plus one day is Mar 1; adding an interval would give a timestamp instead.` },
+    { id: 'functions-11', type: 'mcq', tag: 'postgres',
+      q: `In PostgreSQL, what does this return?`,
+      code: `SELECT DATE '2026-03-01'
+     - DATE '2026-02-01';`,
+      options: [`28`, `1 mon`, `28 days`, `ERROR`],
+      answer: 0,
+      why: `Subtracting two dates yields a plain integer number of days. Subtracting two timestamps would give an interval instead, which is what the "28 days" option describes.` },
+    { id: 'functions-12', type: 'mcq', tag: 'output',
+      q: `What does AGE return?`,
+      code: `SELECT AGE(DATE '2026-03-15',
+           DATE '2025-12-20');`,
+      options: [`85 days`, `2 mons 25 days`, `3 mons -5 days`, `2 mons 26 days`],
+      answer: 3,
+      why: `AGE returns a symbolic years/months/days interval, borrowing days from the earlier date's month (December, 31 days). The plain day count 85 comes from date minus date.` },
+    { id: 'functions-13', type: 'mcq', tag: 'output',
+      q: `A report needs hours and minutes. What does this return?`,
+      code: `SELECT TO_CHAR(TIMESTAMP '2026-03-05 14:07',
+               'HH24:MM');`,
+      options: [`14:07`, `14:03`, `14:00`, `02:03`],
+      answer: 1,
+      why: `MM is the month (03), not minutes; minutes are MI. "14:07" is what you would see with 'HH24:MI'.` },
+    { id: 'functions-14', type: 'mcq', tag: 'output',
+      q: `How many rows does this calendar generate?`,
+      code: `SELECT COUNT(*)
+FROM generate_series(
+  DATE '2026-02-01', DATE '2026-02-28',
+  INTERVAL '1 day');`,
+      options: [`28`, `27`, `29`, `1`],
+      answer: 0,
+      why: `generate_series includes both endpoints, so Feb 1 through Feb 28 gives 28 rows. 27 assumes the stop value is excluded like a Python range.` },
+    { id: 'functions-15', type: 'mcq', tag: 'debug',
+      q: `This fails: function round(double precision, integer) does not exist. What fixes it?`,
+      code: `SELECT ROUND(3.14159::float8, 2);`,
+      noRun: true,
+      options: [`Cast the 2 to numeric`, `Use ROUND(x, 2.0) instead`, `Cast the value to numeric`, `Replace ROUND with TRUNC`],
+      answer: 2,
+      why: `The two-argument ROUND exists only for numeric, so cast the value: ROUND(x::numeric, 2). Making the scale numeric does not help, since the first argument is still double precision.` },
+    { id: 'functions-16', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT CEIL(-2.5) AS c, FLOOR(-2.5) AS f;`,
+      options: [`-3 | -2`, `-2 | -2`, `-3 | -3`, `-2 | -3`],
+      answer: 3,
+      why: `CEIL rounds toward positive infinity (-2) and FLOOR toward negative infinity (-3). Neither rounds toward zero or away from it.` },
+    { id: 'functions-17', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT MOD(-7, 3) AS m, -7 % 3 AS r;`,
+      options: [`-1 | -1`, `2 | 2`, `2 | -1`, `-1 | 2`],
+      answer: 0,
+      why: `In PostgreSQL the result takes the sign of the dividend, and % is the same as MOD. The value 2 is the mathematical modulo that Python returns.` },
+    { id: 'functions-18', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT ROUND(1234.5678, -2) AS r;`,
+      options: [`1234.57`, `1200`, `1230`, `Error: negative scale`],
+      answer: 1,
+      why: `A negative scale rounds to the left of the decimal point, here to the nearest hundred. Scale 2 would give 1234.57 and scale -1 would give 1230.` },
+    { id: 'functions-19', type: 'mcq', tag: 'interview',
+      q: `You need a / b to return NULL, not an error, when b is 0. Which expression does it?`,
+      options: [`a / COALESCE(b, 0)`, `COALESCE(a / b, 0)`, `a / NULLIF(b, 0)`, `a / GREATEST(b, 1)`],
+      answer: 2,
+      why: `NULLIF(b, 0) turns a zero divisor into NULL and the division then yields NULL. COALESCE(a / b, 0) still evaluates the division first and raises the error.` },
+    { id: 'functions-20', type: 'mcq', tag: 'postgres',
+      q: `What does this return in PostgreSQL?`,
+      code: `SELECT GREATEST(1, NULL, 3) AS g,
+       LEAST(NULL, 5) AS l;`,
+      options: [`3 | 5`, `NULL | NULL`, `3 | NULL`, `1 | 5`],
+      answer: 0,
+      why: `GREATEST and LEAST ignore NULL arguments and return NULL only if every argument is NULL. Some other databases return NULL when any argument is NULL.` },
+    { id: 'functions-21', type: 'mcq', tag: 'syntax',
+      q: `Which CASE correctly maps score >= 90 to 'A' in PostgreSQL?`,
+      options: [`CASE score WHEN >= 90 THEN 'A' END`, `CASE WHEN score >= 90 THEN 'A' END`, `CASE score >= 90 THEN 'A' END`, `CASE IF score >= 90 THEN 'A' END`],
+      answer: 1,
+      why: `Comparisons other than equality need the searched form: CASE WHEN condition THEN. The simple form (CASE x WHEN value) can only test equality.` },
+    { id: 'functions-22', type: 'mcq', tag: 'theory',
+      q: `A CASE expression has no ELSE and no WHEN matches. What does it return?`,
+      options: [`An empty string`, `The first THEN value`, `An error`, `NULL`],
+      answer: 3,
+      why: `A missing ELSE behaves like ELSE NULL. It does not raise an error and does not fall back to any branch.` },
+    { id: 'functions-23', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT CASE
+  WHEN 85 >= 60 THEN 'pass'
+  WHEN 85 >= 80 THEN 'merit'
+  ELSE 'fail' END AS grade;`,
+      options: [`merit`, `fail`, `pass`, `pass, merit`],
+      answer: 2,
+      why: `The first true WHEN wins and later branches are never checked. List the most restrictive condition first, or 'merit' becomes unreachable.` },
+    { id: 'functions-24', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT CASE NULL::int
+  WHEN NULL THEN 'is null'
+  ELSE 'other' END AS r;`,
+      options: [`is null`, `NULL`, `error`, `other`],
+      answer: 3,
+      why: `Simple CASE compares with =, and NULL = NULL is unknown, so the branch is skipped and ELSE runs. Use CASE WHEN x IS NULL to test for NULL.` },
+
+    { id: 'functions-r01', type: 'recall', tag: 'syntax',
+      front: `In PostgreSQL, what starts a new word for INITCAP?`,
+      back: `Any non-alphanumeric character (space, hyphen, slash). INITCAP capitalises the first letter of each word and lowercases the rest.` },
+    { id: 'functions-r02', type: 'recall', tag: 'theory',
+      front: `DATE_TRUNC vs EXTRACT: what type does each return?`,
+      back: `<code>DATE_TRUNC('month', ts)</code> returns a timestamp rounded down (2026-03-01 00:00). <code>EXTRACT(month FROM ts)</code> returns a number (3). Group by DATE_TRUNC to keep the year attached.` },
+    { id: 'functions-r03', type: 'recall', tag: 'postgres',
+      front: `What does <code>SPLIT_PART('a,b', ',', 5)</code> return?`,
+      back: `An empty string: not NULL and not an error. Positions are 1-based, and n = 0 raises an error.` },
+    { id: 'functions-r04', type: 'recall', tag: 'syntax',
+      front: `What do LEFT(s, -n) and RIGHT(s, -n) return?`,
+      back: `A negative n drops characters: LEFT(s, -n) removes the last n characters, RIGHT(s, -n) removes the first n. Example: <code>LEFT('postgres', -3)</code> is <code>postg</code>.` },
+    { id: 'functions-r05', type: 'recall', tag: 'theory',
+      front: `LENGTH vs OCTET_LENGTH: what does each count?`,
+      back: `LENGTH (same as CHAR_LENGTH) counts characters; OCTET_LENGTH counts bytes. In UTF8, <code>LENGTH('héllo')</code> is 5 but <code>OCTET_LENGTH('héllo')</code> is 6.` }
+  ]
+});
+DECKS.push({
+  id: 'postgres',
+  name: 'PostgreSQL Specials',
+  emoji: '🐘',
+  blurb: 'Casts, DISTINCT ON, FILTER, arrays, JSONB, upserts, ROLLUP, percentiles.',
+  cards: [
+    { id: 'postgres-01', type: 'mcq', tag: 'postgres',
+      q: `What does this return?`,
+      code: `SELECT 3.7::int AS n;`,
+      options: [`3`, `4`, `3.7`, `error`],
+      answer: 1,
+      why: `Casting a numeric to integer rounds to the nearest whole number, it does not truncate. Use TRUNC(3.7) first if you want 3.` },
+    { id: 'postgres-02', type: 'mcq', tag: 'output',
+      q: `Which rows (g,v) does this return?`,
+      code: `SELECT DISTINCT ON (g) g, v
+FROM (VALUES ('a',1),('a',3),('b',2))
+  AS t(g, v)
+ORDER BY g, v DESC;`,
+      options: [`a,1 and b,2`, `a,1 and a,3 and b,2`, `a,3 only`, `a,3 and b,2`],
+      answer: 3,
+      why: `DISTINCT ON keeps the first row of each g after sorting, and v DESC puts 3 first for group a. Plain DISTINCT is what would keep both a rows.` },
+    { id: 'postgres-03', type: 'mcq', tag: 'debug',
+      q: `This latest-order-per-customer query errors in PostgreSQL. What fixes it?`,
+      code: `SELECT DISTINCT ON (customer_id)
+       customer_id, order_date
+FROM orders
+ORDER BY order_date DESC;`,
+      noRun: true,
+      options: [`Start ORDER BY with customer_id`, `Add GROUP BY customer_id`, `Move order_date into DISTINCT ON`, `Add LIMIT 1 to the query`],
+      answer: 0,
+      why: `DISTINCT ON expressions must match the leftmost ORDER BY expressions: ORDER BY customer_id, order_date DESC. GROUP BY does not help, because DISTINCT ON picks rows rather than aggregating.` },
+    { id: 'postgres-04', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT COUNT(*) FILTER (WHERE v > 1) AS c,
+       SUM(v) FILTER (WHERE v > 5) AS s
+FROM (VALUES (1),(2),(3)) AS t(v);`,
+      options: [`3 | 0`, `3 | NULL`, `2 | NULL`, `2 | 0`],
+      answer: 2,
+      why: `FILTER limits the rows each aggregate sees. COUNT of two rows is 2, and SUM over zero rows is NULL, not 0.` },
+    { id: 'postgres-05', type: 'mcq', tag: 'postgres',
+      q: `What does this return in PostgreSQL?`,
+      code: `SELECT 5 BETWEEN 10 AND 1 AS a,
+       5 BETWEEN SYMMETRIC 10 AND 1 AS b;`,
+      options: [`true | true`, `false | false`, `true | false`, `false | true`],
+      answer: 3,
+      why: `Plain BETWEEN needs the low bound first, so 10 AND 1 matches nothing. SYMMETRIC swaps the bounds when needed, making the range 1 to 10.` },
+    { id: 'postgres-06', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT 'abc' ~ 'b' AS a,
+       'ABC' ~ 'b' AS b,
+       'ABC' ~* 'b' AS c;`,
+      options: [`true | false | true`, `false | false | true`, `true | true | true`, `true | false | false`],
+      answer: 0,
+      why: `~ is a case-sensitive regex match that is not anchored, so 'b' matches inside 'abc'. ~* ignores case. "false" for the first column would assume LIKE-style full matching.` },
+    { id: 'postgres-07', type: 'mcq', tag: 'output',
+      q: `How do these aggregates treat the NULL?`,
+      code: `SELECT string_agg(v::text, ',') AS s,
+       array_agg(v) AS a
+FROM (VALUES (1),(NULL),(3)) AS t(v);`,
+      options: [`1,3 | {1,3}`, `1,3 | {1,NULL,3}`, `1,,3 | {1,NULL,3}`, `NULL | {1,3}`],
+      answer: 1,
+      why: `string_agg skips NULL inputs, while array_agg keeps them as NULL elements. "1,,3" would need NULL turned into an empty string.` },
+    { id: 'postgres-08', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT (ARRAY[10,20,30])[1] AS a,
+       (ARRAY[10,20,30])[0] AS b;`,
+      options: [`20 | 10`, `10 | error`, `10 | NULL`, `20 | NULL`],
+      answer: 2,
+      why: `PostgreSQL arrays are 1-based by default, and an out-of-range subscript returns NULL instead of raising an error.` },
+    { id: 'postgres-09', type: 'mcq', tag: 'syntax',
+      q: `Which condition matches rows whose id appears in the integer array ids?`,
+      options: [`WHERE id IN ids`, `WHERE id = ids[ALL]`, `WHERE ids CONTAINS id`, `WHERE id = ANY(ids)`],
+      answer: 3,
+      why: `= ANY(array) compares id with each element. IN needs a parenthesised list or subquery, so "IN ids" is a syntax error.` },
+    { id: 'postgres-10', type: 'mcq', tag: 'postgres',
+      q: `What does this return for an empty array?`,
+      code: `SELECT cardinality('{}'::int[]) AS c,
+       array_length('{}'::int[], 1) AS l;`,
+      options: [`0 | NULL`, `0 | 0`, `NULL | 0`, `1 | 0`],
+      answer: 0,
+      why: `cardinality counts all elements, so an empty array gives 0. array_length of an empty array is NULL because it has no dimension 1.` },
+    { id: 'postgres-11', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT unnest(ARRAY[1,2,3]) * 2 AS d;`,
+      options: [`1 row: {2,4,6}`, `3 rows: 2, 4, 6`, `1 row: 12`, `error: unnest needs FROM`],
+      answer: 1,
+      why: `A set-returning function in the SELECT list yields one row per element, and the multiplication applies to each. PostgreSQL has no element-wise array arithmetic that returns {2,4,6}.` },
+    { id: 'postgres-12', type: 'mcq', tag: 'output',
+      q: `What types do the two operators return?`,
+      code: `WITH t(j) AS (SELECT '{"a":1}'::jsonb)
+SELECT pg_typeof(j -> 'a') AS x,
+       pg_typeof(j ->> 'a') AS y
+FROM t;`,
+      options: [`jsonb | jsonb`, `text | jsonb`, `jsonb | text`, `text | text`],
+      answer: 2,
+      why: `-> returns jsonb, so a string result keeps its JSON quotes, while ->> returns plain text. Use ->> when you want to compare or display the value.` },
+    { id: 'postgres-13', type: 'mcq', tag: 'postgres',
+      q: `What does this return?`,
+      code: `SELECT '{"a":1}'::jsonb
+       @> '{"a":1,"b":2}'::jsonb;`,
+      options: [`true`, `NULL`, `error`, `false`],
+      answer: 3,
+      why: `a @> b means the left value contains the right one. The left side lacks "b", so the result is false; swapping the operands would give true.` },
+    { id: 'postgres-14', type: 'mcq', tag: 'output',
+      q: `What do x and y return?`,
+      code: `WITH t(j) AS (SELECT '{"a":null}'::jsonb)
+SELECT (j -> 'a') IS NULL AS x,
+       (j ->> 'a') IS NULL AS y
+FROM t;`,
+      options: [`false | true`, `true | true`, `true | false`, `false | false`],
+      answer: 0,
+      why: `-> returns the JSON value null, a real jsonb value and not SQL NULL. ->> converts a JSON null to SQL NULL, so the two operators differ here.` },
+    { id: 'postgres-15', type: 'mcq', tag: 'postgres',
+      q: `INSERT ... ON CONFLICT DO NOTHING RETURNING id hits an existing row. What does RETURNING give?`,
+      options: [`The id of the existing row`, `An error about the conflict`, `No row for that insert`, `NULL in a one-row result`],
+      answer: 2,
+      why: `A skipped row returns nothing at all. To get the id back on conflict, use DO UPDATE with RETURNING or run a follow-up SELECT.` },
+    { id: 'postgres-16', type: 'mcq', tag: 'syntax',
+      q: `In ON CONFLICT DO UPDATE, how do you refer to the values you tried to insert?`,
+      options: [`NEW.col`, `EXCLUDED.col`, `INSERTED.col`, `VALUES(col)`],
+      answer: 1,
+      why: `EXCLUDED is the row proposed for insertion. NEW is only for triggers, INSERTED is SQL Server, and VALUES(col) is MySQL.` },
+    { id: 'postgres-17', type: 'mcq', tag: 'interview',
+      q: `An INSERT that used a SERIAL id is rolled back. What happens to that id?`,
+      options: [`It is consumed; the next insert skips it`, `It returns to the sequence for reuse`, `The sequence rewinds to MAX(id) + 1`, `It is held until the session ends`],
+      answer: 0,
+      why: `Sequences are not transactional, so a rolled-back id leaves a gap. Never rely on SERIAL or IDENTITY values being gap-free.` },
+    { id: 'postgres-18', type: 'mcq', tag: 'output',
+      q: `Which rows (g, s) does this return?`,
+      code: `SELECT g, SUM(v) AS s
+FROM (VALUES ('a',1),('a',2),('b',4))
+  AS t(g, v)
+GROUP BY ROLLUP (g)
+ORDER BY g;`,
+      options: [`NULL 7, a 3, b 4`, `a 3, b 4`, `a 1, a 2, b 4, NULL 7`, `a 3, b 4, NULL 7`],
+      answer: 3,
+      why: `ROLLUP adds a grand-total row where g is NULL, and ascending order puts NULLs last. Without ROLLUP you would get only the a and b rows.` },
+    { id: 'postgres-19', type: 'mcq', tag: 'theory',
+      q: `In a ROLLUP query, what does GROUPING(col) = 1 on a row mean?`,
+      options: [`col is NULL in the source data`, `The row has exactly one input row`, `col was rolled up into a subtotal`, `The row duplicates another group`],
+      answer: 2,
+      why: `GROUPING flags rows where col was aggregated away, so you can tell that placeholder NULL from a real NULL value in the data.` },
+    { id: 'postgres-20', type: 'mcq', tag: 'output',
+      q: `What does this return?`,
+      code: `SELECT PERCENTILE_CONT(0.5) WITHIN GROUP
+         (ORDER BY v) AS cont,
+       PERCENTILE_DISC(0.5) WITHIN GROUP
+         (ORDER BY v) AS disc
+FROM (VALUES (1),(2),(3),(10)) AS t(v);`,
+      options: [`4 | 2`, `2.5 | 2`, `2.5 | 3`, `2 | 2.5`],
+      answer: 1,
+      why: `CONT interpolates between the middle values 2 and 3 to get 2.5, while DISC returns an actual value, the first whose cumulative share reaches 0.5 (2). Neither is the mean, 4.` },
+    { id: 'postgres-21', type: 'mcq', tag: 'output',
+      q: `In what order do the booleans come back?`,
+      code: `SELECT b
+FROM (VALUES (true),(false),(NULL))
+  AS t(b)
+ORDER BY b;`,
+      options: [`true, false, NULL`, `NULL, false, true`, `false, true, NULL`, `false, NULL, true`],
+      answer: 2,
+      why: `false sorts before true, and NULL sorts last in an ascending sort. true first would be descending order.` },
+    { id: 'postgres-22', type: 'mcq', tag: 'debug',
+      q: `The SELECT fails with: relation "users" does not exist. Why?`,
+      code: `CREATE TABLE "Users" (id int);
+SELECT * FROM Users;`,
+      noRun: true,
+      options: [`Users is a reserved word`, `Quoted tables need a schema prefix`, `SELECT * needs a table alias here`, `Unquoted Users folds to users`],
+      answer: 3,
+      why: `Unquoted identifiers fold to lowercase, so Users becomes users, which differs from the quoted "Users". Prefer lowercase snake_case names so quoting is never needed.` },
+
+    { id: 'postgres-r01', type: 'recall', tag: 'postgres',
+      front: `What does GENERATED ALWAYS AS IDENTITY reject that SERIAL allows?`,
+      back: `Explicitly supplied values for the column, unless you add <code>OVERRIDING SYSTEM VALUE</code>. A SERIAL column accepts any value you insert.` },
+    { id: 'postgres-r02', type: 'recall', tag: 'syntax',
+      front: `What is the difference between the jsonb operators @&gt; and ?`,
+      back: `<code>@&gt;</code> tests whether the left value contains the whole right value. <code>?</code> only tests whether a top-level key (or array string element) exists.` },
+    { id: 'postgres-r03', type: 'recall', tag: 'theory',
+      front: `Which grouping sets do ROLLUP (a, b) and CUBE (a, b) produce?`,
+      back: `ROLLUP: (a,b), (a), (). CUBE: (a,b), (a), (b), (). GROUPING SETS lets you list exactly the sets you want.` },
+    { id: 'postgres-r04', type: 'recall', tag: 'interview',
+      front: `What does ON CONFLICT DO UPDATE require that DO NOTHING does not?`,
+      back: `A conflict target, such as <code>(email)</code> or a constraint name, backed by a unique index. DO NOTHING works without one.` },
+    { id: 'postgres-r05', type: 'recall', tag: 'postgres',
+      front: `How does PostgreSQL treat unquoted vs "quoted" identifiers?`,
+      back: `Unquoted names fold to lowercase (Users = users). Quoted names keep exact case and must be quoted every time. Use lowercase snake_case to avoid quoting.` }
+  ]
+});
+mountReview(document.getElementById('app'), DECKS, { storageKey: 'qp.srs.v1', highlight: highlight });
+})();
+</script>
+<script>
+// Offline support: install the service worker, show an update banner instead of reloading mid-session.
+(function () {
+  var net = document.getElementById('net-status');
+  function status() { if (net) net.textContent = navigator.onLine ? 'online' : 'offline ✓ all cards available'; }
+  addEventListener('online', status); addEventListener('offline', status); status();
+  try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) {}
+  if (!('serviceWorker' in navigator)) return;
+  var bar = document.getElementById('update-bar'), refreshing = false;
+  navigator.serviceWorker.register('./sw.js').then(function (reg) {
+    function offer(w) { bar.hidden = false; document.getElementById('update-btn').onclick = function () { w.postMessage('update'); }; }
+    if (reg.waiting && navigator.serviceWorker.controller) offer(reg.waiting);
+    reg.addEventListener('updatefound', function () {
+      var w = reg.installing;
+      w && w.addEventListener('statechange', function () { if (w.state === 'installed' && navigator.serviceWorker.controller) offer(w); });
+    });
+  });
+  navigator.serviceWorker.addEventListener('controllerchange', function () { if (!refreshing) { refreshing = true; location.reload(); } });
+})();
+</script>
+</body>
+</html>
