@@ -1,5 +1,5 @@
 // SQL Cards service worker. Bump VERSION (the build does this) to ship an update.
-const VERSION = 'sql-cards-202610281924';
+const VERSION = 'sql-cards-202610290001';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES))));
 self.addEventListener('activate', e => e.waitUntil(
